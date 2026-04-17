@@ -1,0 +1,7 @@
+[gd_resource type="LabelSettings" format=3 uid="uid://bnov46sgi1h14"]
+
+[ext_resource type="FontFile" uid="uid://dtfsqrve0jhsg" path="res://fonts/Tomorrow/Tomorrow-SemiBold.ttf" id="1_57nfi"]
+
+[resource]
+font = ExtResource("1_57nfi")
+font_size = 18

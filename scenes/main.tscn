@@ -1,0 +1,1030 @@
+[gd_scene format=3 uid="uid://cmrwhot781sgc"]
+
+[ext_resource type="Script" uid="uid://dxa58tws43p73" path="res://scripts/ui/menu_sphere.gd" id="1_menu_sphere"]
+[ext_resource type="Texture2D" uid="uid://dlese5gl55iet" path="res://textures/grad1.png" id="1_o5qli"]
+[ext_resource type="Script" uid="uid://31885r2waqux" path="res://scripts/ui/main_screen_controller.gd" id="1_o6xl0"]
+[ext_resource type="Shader" uid="uid://cop30b0b0knjn" path="res://shaders/goldberg_cell.gdshader" id="2_tipki"]
+[ext_resource type="FontFile" uid="uid://dtfsqrve0jhsg" path="res://fonts/Tomorrow/Tomorrow-SemiBold.ttf" id="3_tefeu"]
+[ext_resource type="Texture2D" uid="uid://bwjxaan3gt5it" path="res://textures/orb_sweeper_logo_shadow.png" id="4_0ld40"]
+[ext_resource type="Material" uid="uid://dpaenm7suh414" path="res://materials/core.tres" id="4_gqmmt"]
+[ext_resource type="StyleBox" uid="uid://cooutr63if5vl" path="res://ui_styles/game_ui_button.tres" id="4_o6xl0"]
+[ext_resource type="StyleBox" uid="uid://bb8s1p1gue47" path="res://ui_styles/game_ui_button_pressed.tres" id="5_tipki"]
+[ext_resource type="StyleBox" uid="uid://ca56tcdv6r7l8" path="res://ui_styles/game_ui_button_hover.tres" id="6_85g3d"]
+[ext_resource type="Texture2D" uid="uid://cw5hhjvooartc" path="res://textures/icon_back.svg" id="9_85g3d"]
+[ext_resource type="Script" uid="uid://jag0ardhylha" path="res://scripts/ui/screen_new_game.gd" id="9_a8y0u"]
+[ext_resource type="Texture2D" uid="uid://bkkx2yy2cw5x0" path="res://textures/icon_bomb.svg" id="10_choun"]
+[ext_resource type="StyleBox" uid="uid://drwgrv1qr7enj" path="res://ui_styles/game_ui_panel.tres" id="10_eb6dy"]
+[ext_resource type="Script" uid="uid://cm85etho7cqe4" path="res://scripts/ui/screen_custom_game.gd" id="11_a8y0u"]
+[ext_resource type="FontFile" uid="uid://cu7kew5uh63oj" path="res://fonts/Tomorrow/Tomorrow-Regular.ttf" id="11_trceg"]
+[ext_resource type="StyleBox" uid="uid://cgjhld5nge7y4" path="res://ui_styles/slider_track.tres" id="15_gqmmt"]
+[ext_resource type="Script" uid="uid://b18xro3x1d5je" path="res://scripts/ui/screen_records.gd" id="16_muem4"]
+[ext_resource type="AudioStream" uid="uid://xocpm4kyqtms" path="res://sounds/ui_click.mp3" id="17_dp3eg"]
+[ext_resource type="AudioStream" uid="uid://bu2tesdp6xgv2" path="res://sounds/music_zapsplat_among_the_stars.mp3" id="18_dp3eg"]
+[ext_resource type="Script" uid="uid://2n8ogibstjul" path="res://scripts/ui/screen_settings.gd" id="20_sttng"]
+[ext_resource type="Script" uid="uid://b683nup63bmt1" path="res://scripts/ui/screen_about.gd" id="21_about"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_0wfyh"]
+panorama = ExtResource("1_o5qli")
+
+[sub_resource type="BoxMesh" id="BoxMesh_tipki"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_yc10j"]
+
+[sub_resource type="Sky" id="Sky_ghpyy"]
+sky_material = SubResource("PanoramaSkyMaterial_0wfyh")
+
+[sub_resource type="Environment" id="Environment_sugp2"]
+background_mode = 2
+background_color = Color(0.07058824, 0.14901961, 0.29803923, 1)
+background_energy_multiplier = 0.7
+sky = SubResource("Sky_ghpyy")
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.3
+reflected_light_source = 1
+glow_enabled = true
+glow_intensity = 0.97
+glow_strength = 1.5
+fog_mode = 1
+fog_light_color = Color(0.752208, 0.81768143, 0.9852026, 1)
+fog_sun_scatter = 0.22
+fog_density = 0.15
+fog_depth_begin = 18.0
+fog_depth_end = 60.0
+volumetric_fog_density = 0.0
+volumetric_fog_length = 16.5
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_jyhfs"]
+dof_blur_far_distance = 6.56
+dof_blur_near_distance = 2.75
+
+[sub_resource type="Compositor" id="Compositor_tbgi4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0ld40"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jbj1t"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(0.16078432, 0.078431375, 0.078431375, 0.8784314)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_muem4"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(0.09019608, 0.02745098, 0.02745098, 0.8784314)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dp3eg"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(0.2509804, 0.12156863, 0.12156863, 0.8784314)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0ld40"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(0.2509804, 0.12156863, 0.12156863, 0.8784314)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 5
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gqmmt"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a8y0u"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ya4ey"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_choun"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yc10j"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jscy8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pm3ni"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_y6deb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_og1vs"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2wyq8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dp3eg"]
+
+[node name="Main" type="Node3D" unique_id=795857839 node_paths=PackedStringArray("click_sound", "screen_main_menu", "screen_new_game", "screen_custom_game", "screen_records", "screen_settings", "screen_about")]
+script = ExtResource("1_o6xl0")
+click_sound = NodePath("ClickSound")
+screen_main_menu = NodePath("GUI/MainMenu")
+screen_new_game = NodePath("GUI/NewGameMenu")
+screen_custom_game = NodePath("GUI/CustomGameMenu")
+screen_records = NodePath("GUI/RecordsScreen")
+screen_settings = NodePath("GUI/SettingsMenu")
+screen_about = NodePath("GUI/AboutMenu")
+menu_sky_material = SubResource("PanoramaSkyMaterial_0wfyh")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=624612891]
+mesh = SubResource("BoxMesh_tipki")
+script = ExtResource("1_menu_sphere")
+shader = ExtResource("2_tipki")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D" unique_id=1254380093]
+transform = Transform3D(12, 0, 0, 0, 12, 0, 0, 0, 12, 0, 0, 0)
+mesh = SubResource("SphereMesh_yc10j")
+surface_material_override/0 = ExtResource("4_gqmmt")
+
+[node name="FrontLight" type="DirectionalLight3D" parent="." unique_id=641032915]
+transform = Transform3D(0.17364822, -0.6330222, 0.7544066, 0, -0.7660445, -0.6427876, 0.9848077, 0.11161892, -0.13302226, -200, 0, 0)
+light_color = Color(0.9999997, 0.9117137, 0.82177347, 1)
+light_specular = 0.5
+light_bake_mode = 0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=469051510]
+environment = SubResource("Environment_sugp2")
+camera_attributes = SubResource("CameraAttributesPractical_jyhfs")
+compositor = SubResource("Compositor_tbgi4")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=429204941]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -15, 1, -5)
+current = true
+
+[node name="GUI" type="VBoxContainer" parent="." unique_id=1667039133]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="Logo" type="MarginContainer" parent="GUI" unique_id=1803117105]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="TextureRect" type="TextureRect" parent="GUI/Logo" unique_id=1200418450]
+layout_mode = 2
+texture = ExtResource("4_0ld40")
+expand_mode = 5
+
+[node name="MainMenu" type="MarginContainer" parent="GUI" unique_id=2095990837]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="MainMenu" type="VBoxContainer" parent="GUI/MainMenu" unique_id=1417867696]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="NewGame" type="Button" parent="GUI/MainMenu/MainMenu" unique_id=1110868430]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_tefeu")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("4_o6xl0")
+theme_override_styles/pressed = ExtResource("5_tipki")
+theme_override_styles/hover = ExtResource("6_85g3d")
+text = "New Game"
+
+[node name="Records" type="Button" parent="GUI/MainMenu/MainMenu" unique_id=1065803488]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_tefeu")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("4_o6xl0")
+theme_override_styles/pressed = ExtResource("5_tipki")
+theme_override_styles/hover = ExtResource("6_85g3d")
+text = "Records"
+
+[node name="Settings" type="Button" parent="GUI/MainMenu/MainMenu" unique_id=1806668376]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_tefeu")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("4_o6xl0")
+theme_override_styles/pressed = ExtResource("5_tipki")
+theme_override_styles/hover = ExtResource("6_85g3d")
+text = "Settings"
+
+[node name="About" type="Button" parent="GUI/MainMenu/MainMenu" unique_id=1806668377]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_tefeu")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("4_o6xl0")
+theme_override_styles/pressed = ExtResource("5_tipki")
+theme_override_styles/hover = ExtResource("6_85g3d")
+text = "About"
+
+[node name="HSeparator" type="HSeparator" parent="GUI/MainMenu/MainMenu" unique_id=864753846]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_0ld40")
+
+[node name="ExitButton" type="Button" parent="GUI/MainMenu/MainMenu" unique_id=721976069]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("3_tefeu")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_jbj1t")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_muem4")
+theme_override_styles/hover = SubResource("StyleBoxFlat_dp3eg")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_0ld40")
+text = "Exit"
+
+[node name="NewGameMenu" type="MarginContainer" parent="GUI" unique_id=1419363003 node_paths=PackedStringArray("no_guess_check")]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+script = ExtResource("9_a8y0u")
+no_guess_check = NodePath("NewGame/NoGuessPanel/MarginContainer/HBoxContainer/NoGuessCheckBox")
+
+[node name="NewGame" type="VBoxContainer" parent="GUI/NewGameMenu" unique_id=541820589]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="NoGuessPanel" type="PanelContainer" parent="GUI/NewGameMenu/NewGame" unique_id=1419363004]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("10_eb6dy")
+
+[node name="MarginContainer" type="MarginContainer" parent="GUI/NewGameMenu/NewGame/NoGuessPanel" unique_id=1419363005]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 12
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/NewGameMenu/NewGame/NoGuessPanel/MarginContainer" unique_id=1419363006]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="GUI/NewGameMenu/NewGame/NoGuessPanel/MarginContainer/HBoxContainer" unique_id=1419363007]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("3_tefeu")
+theme_override_font_sizes/font_size = 18
+text = "No Guessing"
+
+[node name="NoGuessCheckBox" type="CheckButton" parent="GUI/NewGameMenu/NewGame/NoGuessPanel/MarginContainer/HBoxContainer" unique_id=1419363008]
+layout_mode = 2
+
+[node name="EasyMode" type="Button" parent="GUI/NewGameMenu/NewGame" unique_id=2111763979]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_tefeu")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("4_o6xl0")
+theme_override_styles/pressed = ExtResource("5_tipki")
+theme_override_styles/hover = ExtResource("6_85g3d")
+text = "Easy"
+
+[node name="NormalMode" type="Button" parent="GUI/NewGameMenu/NewGame" unique_id=1525987238]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_tefeu")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("4_o6xl0")
+theme_override_styles/pressed = ExtResource("5_tipki")
+theme_override_styles/hover = ExtResource("6_85g3d")
+text = "Normal"
+
+[node name="HardMode" type="Button" parent="GUI/NewGameMenu/NewGame" unique_id=656186181]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_tefeu")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("4_o6xl0")
+theme_override_styles/pressed = ExtResource("5_tipki")
+theme_override_styles/hover = ExtResource("6_85g3d")
+text = "Hard"
+
+[node name="CustomMode" type="Button" parent="GUI/NewGameMenu/NewGame" unique_id=1430053824]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_tefeu")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("4_o6xl0")
+theme_override_styles/pressed = ExtResource("5_tipki")
+theme_override_styles/hover = ExtResource("6_85g3d")
+text = "Custom"
+
+[node name="HSeparator" type="HSeparator" parent="GUI/NewGameMenu/NewGame" unique_id=1565441404]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_gqmmt")
+
+[node name="BackToMainMenu" type="Button" parent="GUI/NewGameMenu/NewGame" unique_id=352526750]
+layout_mode = 2
+theme_override_constants/icon_max_width = 24
+theme_override_fonts/font = ExtResource("3_tefeu")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("4_o6xl0")
+theme_override_styles/pressed = ExtResource("5_tipki")
+theme_override_styles/hover = ExtResource("6_85g3d")
+text = "Back"
+
+[node name="TextureRect" type="TextureRect" parent="GUI/NewGameMenu/NewGame/BackToMainMenu" unique_id=1948664335]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("9_85g3d")
+expand_mode = 4
+
+[node name="CustomGameMenu" type="MarginContainer" parent="GUI" unique_id=1151314118 node_paths=PackedStringArray("tiles_count_label", "mines_density_percent_label", "mines_count_label", "difficulty_label", "size_slider", "density_slider", "no_guess_check", "no_guess_hint_label")]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+script = ExtResource("11_a8y0u")
+tiles_count_label = NodePath("CustomGame/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/SizeCells")
+mines_density_percent_label = NodePath("CustomGame/PanelContainer2/MarginContainer/VBoxContainer/HBoxContainer/MineDensity")
+mines_count_label = NodePath("CustomGame/PanelContainer2/MarginContainer/VBoxContainer/HBoxContainer2/MinesCount")
+difficulty_label = NodePath("CustomGame/PanelContainer2/MarginContainer/VBoxContainer/HBoxContainer2/Difficulty")
+size_slider = NodePath("CustomGame/PanelContainer/MarginContainer/VBoxContainer/HSlider")
+density_slider = NodePath("CustomGame/PanelContainer2/MarginContainer/VBoxContainer/HSlider")
+no_guess_check = NodePath("CustomGame/NoGuessPanel/MarginContainer/VBoxContainer/HBoxContainer/NoGuessCheckBox")
+no_guess_hint_label = NodePath("CustomGame/NoGuessPanel/MarginContainer/VBoxContainer/HintLabel")
+
+[node name="CustomGame" type="VBoxContainer" parent="GUI/CustomGameMenu" unique_id=401751870]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="GUI/CustomGameMenu/CustomGame" unique_id=2050558228]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("10_eb6dy")
+
+[node name="MarginContainer" type="MarginContainer" parent="GUI/CustomGameMenu/CustomGame/PanelContainer" unique_id=1695006295]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/CustomGameMenu/CustomGame/PanelContainer/MarginContainer" unique_id=610376965]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/CustomGameMenu/CustomGame/PanelContainer/MarginContainer/VBoxContainer" unique_id=1707148201]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="GUI/CustomGameMenu/CustomGame/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=281811863]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_tefeu")
+theme_override_font_sizes/font_size = 18
+text = "Size"
+
+[node name="VSeparator" type="VSeparator" parent="GUI/CustomGameMenu/CustomGame/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=60651258]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_a8y0u")
+
+[node name="SizeCells" type="Label" parent="GUI/CustomGameMenu/CustomGame/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1581725188]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.5019608)
+theme_override_fonts/font = ExtResource("11_trceg")
+theme_override_font_sizes/font_size = 18
+text = "92 tiles"
+
+[node name="HSlider" type="HSlider" parent="GUI/CustomGameMenu/CustomGame/PanelContainer/MarginContainer/VBoxContainer" unique_id=362121849]
+layout_mode = 2
+theme_override_styles/slider = ExtResource("15_gqmmt")
+theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_ya4ey")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_choun")
+min_value = 2.0
+max_value = 10.0
+value = 3.0
+rounded = true
+tick_count = 9
+ticks_on_borders = true
+ticks_position = 3
+
+[node name="PanelContainer2" type="PanelContainer" parent="GUI/CustomGameMenu/CustomGame" unique_id=1256131174]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("10_eb6dy")
+
+[node name="MarginContainer" type="MarginContainer" parent="GUI/CustomGameMenu/CustomGame/PanelContainer2" unique_id=1242993702]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/CustomGameMenu/CustomGame/PanelContainer2/MarginContainer" unique_id=1608654928]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/CustomGameMenu/CustomGame/PanelContainer2/MarginContainer/VBoxContainer" unique_id=1953975802]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="GUI/CustomGameMenu/CustomGame/PanelContainer2/MarginContainer/VBoxContainer/HBoxContainer" unique_id=187559719]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_tefeu")
+theme_override_font_sizes/font_size = 18
+text = "Mine Density"
+
+[node name="VSeparator" type="VSeparator" parent="GUI/CustomGameMenu/CustomGame/PanelContainer2/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1347393050]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_a8y0u")
+
+[node name="MineDensity" type="Label" parent="GUI/CustomGameMenu/CustomGame/PanelContainer2/MarginContainer/VBoxContainer/HBoxContainer" unique_id=2014107485]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.5019608)
+theme_override_fonts/font = ExtResource("11_trceg")
+theme_override_font_sizes/font_size = 18
+text = "15%"
+
+[node name="HSlider" type="HSlider" parent="GUI/CustomGameMenu/CustomGame/PanelContainer2/MarginContainer/VBoxContainer" unique_id=1847101077]
+layout_mode = 2
+theme_override_styles/slider = ExtResource("15_gqmmt")
+theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_ya4ey")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_choun")
+min_value = 0.05
+max_value = 0.5
+step = 0.01
+value = 0.15000000000000002
+tick_count = 45
+ticks_on_borders = true
+ticks_position = 3
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="GUI/CustomGameMenu/CustomGame/PanelContainer2/MarginContainer/VBoxContainer" unique_id=1045444040]
+layout_mode = 2
+
+[node name="MinesCount" type="Label" parent="GUI/CustomGameMenu/CustomGame/PanelContainer2/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1687090183]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.5019608)
+theme_override_fonts/font = ExtResource("11_trceg")
+theme_override_font_sizes/font_size = 18
+text = "14 mines"
+
+[node name="VSeparator" type="VSeparator" parent="GUI/CustomGameMenu/CustomGame/PanelContainer2/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1126488453]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_a8y0u")
+
+[node name="Difficulty" type="Label" parent="GUI/CustomGameMenu/CustomGame/PanelContainer2/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=206374461]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.5019608)
+theme_override_fonts/font = ExtResource("11_trceg")
+theme_override_font_sizes/font_size = 18
+text = "Easy"
+
+[node name="NoGuessPanel" type="PanelContainer" parent="GUI/CustomGameMenu/CustomGame" unique_id=1151314119]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("10_eb6dy")
+
+[node name="MarginContainer" type="MarginContainer" parent="GUI/CustomGameMenu/CustomGame/NoGuessPanel" unique_id=1151314120]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/CustomGameMenu/CustomGame/NoGuessPanel/MarginContainer" unique_id=1151314121]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/CustomGameMenu/CustomGame/NoGuessPanel/MarginContainer/VBoxContainer" unique_id=1151314122]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="GUI/CustomGameMenu/CustomGame/NoGuessPanel/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1151314123]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("3_tefeu")
+theme_override_font_sizes/font_size = 18
+text = "No Guessing"
+
+[node name="NoGuessCheckBox" type="CheckButton" parent="GUI/CustomGameMenu/CustomGame/NoGuessPanel/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1151314124]
+layout_mode = 2
+
+[node name="HintLabel" type="Label" parent="GUI/CustomGameMenu/CustomGame/NoGuessPanel/MarginContainer/VBoxContainer" unique_id=1151314125]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.5019608)
+theme_override_fonts/font = ExtResource("11_trceg")
+theme_override_font_sizes/font_size = 14
+text = "Unavailable at densities ≥ 30%."
+autowrap_mode = 2
+
+[node name="Start Game" type="Button" parent="GUI/CustomGameMenu/CustomGame" unique_id=827102156]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_tefeu")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("4_o6xl0")
+theme_override_styles/pressed = ExtResource("5_tipki")
+theme_override_styles/hover = ExtResource("6_85g3d")
+text = "Start"
+
+[node name="MarginContainer" type="MarginContainer" parent="GUI/CustomGameMenu/CustomGame/Start Game" unique_id=1507065535]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -12.0
+offset_bottom = 12.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/margin_right = 16
+
+[node name="TextureRect" type="TextureRect" parent="GUI/CustomGameMenu/CustomGame/Start Game/MarginContainer" unique_id=1625771228]
+layout_mode = 2
+texture = ExtResource("10_choun")
+expand_mode = 4
+
+[node name="HSeparator" type="HSeparator" parent="GUI/CustomGameMenu/CustomGame" unique_id=198071338]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_yc10j")
+
+[node name="BackToNewGameMenu" type="Button" parent="GUI/CustomGameMenu/CustomGame" unique_id=889929435]
+layout_mode = 2
+theme_override_constants/icon_max_width = 24
+theme_override_fonts/font = ExtResource("3_tefeu")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("4_o6xl0")
+theme_override_styles/pressed = ExtResource("5_tipki")
+theme_override_styles/hover = ExtResource("6_85g3d")
+text = "Back"
+
+[node name="TextureRect" type="TextureRect" parent="GUI/CustomGameMenu/CustomGame/BackToNewGameMenu" unique_id=644967374]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("9_85g3d")
+expand_mode = 4
+
+[node name="RecordsScreen" type="MarginContainer" parent="GUI" unique_id=1704869092 node_paths=PackedStringArray("classic_container", "no_guess_container", "custom_list", "sort_by_option", "sort_dir_option")]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+script = ExtResource("16_muem4")
+classic_container = NodePath("VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Classic/ClassicContainer")
+no_guess_container = NodePath("VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/TabContainer/No Guess/NoGuessContainer")
+custom_list = NodePath("VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Custom/VBoxContainer/ScrollContainer/CustomContainer")
+sort_by_option = NodePath("VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Custom/VBoxContainer/HBoxContainer/VBoxContainer/SortingField")
+sort_dir_option = NodePath("VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Custom/VBoxContainer/HBoxContainer/VBoxContainer2/SortingOrder")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/RecordsScreen" unique_id=2041771005]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="GUI/RecordsScreen/VBoxContainer" unique_id=1460448982]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("10_eb6dy")
+
+[node name="MarginContainer" type="MarginContainer" parent="GUI/RecordsScreen/VBoxContainer/PanelContainer" unique_id=338216594]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/RecordsScreen/VBoxContainer/PanelContainer/MarginContainer" unique_id=1437707610]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="GUI/RecordsScreen/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1351437621]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_tefeu")
+theme_override_font_sizes/font_size = 18
+text = "Records"
+
+[node name="TabContainer" type="TabContainer" parent="GUI/RecordsScreen/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=927838445]
+layout_mode = 2
+theme_override_constants/side_margin = 10
+theme_override_constants/tab_separation = 0
+theme_override_fonts/font = ExtResource("11_trceg")
+theme_override_font_sizes/font_size = 16
+current_tab = 0
+
+[node name="Classic" type="MarginContainer" parent="GUI/RecordsScreen/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/TabContainer" unique_id=2088929755]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+metadata/_tab_index = 0
+
+[node name="ClassicContainer" type="VBoxContainer" parent="GUI/RecordsScreen/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Classic" unique_id=103201915]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="No Guess" type="MarginContainer" parent="GUI/RecordsScreen/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/TabContainer" unique_id=775331401]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+metadata/_tab_index = 1
+
+[node name="NoGuessContainer" type="VBoxContainer" parent="GUI/RecordsScreen/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/TabContainer/No Guess" unique_id=775331402]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Custom" type="MarginContainer" parent="GUI/RecordsScreen/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/TabContainer" unique_id=439767592]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+metadata/_tab_index = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/RecordsScreen/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Custom" unique_id=1488994739]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/RecordsScreen/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Custom/VBoxContainer" unique_id=777986222]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/RecordsScreen/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Custom/VBoxContainer/HBoxContainer" unique_id=1634661026]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="GUI/RecordsScreen/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Custom/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1447034004]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.5019608)
+theme_override_fonts/font = ExtResource("11_trceg")
+theme_override_font_sizes/font_size = 14
+text = "Sort by"
+
+[node name="SortingField" type="OptionButton" parent="GUI/RecordsScreen/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Custom/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1725009500]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="GUI/RecordsScreen/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Custom/VBoxContainer/HBoxContainer" unique_id=1985783691]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="GUI/RecordsScreen/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Custom/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=437491183]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.5019608)
+theme_override_fonts/font = ExtResource("11_trceg")
+theme_override_font_sizes/font_size = 14
+text = "Sorting Order"
+
+[node name="SortingOrder" type="OptionButton" parent="GUI/RecordsScreen/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Custom/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=27542882]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="GUI/RecordsScreen/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Custom/VBoxContainer" unique_id=131208298]
+custom_minimum_size = Vector2(0, 250)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CustomContainer" type="VBoxContainer" parent="GUI/RecordsScreen/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Custom/VBoxContainer/ScrollContainer" unique_id=565462852]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 16
+
+[node name="HSeparator" type="HSeparator" parent="GUI/RecordsScreen/VBoxContainer" unique_id=521212731]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_jscy8")
+
+[node name="BackToMainScreenFromRecords" type="Button" parent="GUI/RecordsScreen/VBoxContainer" unique_id=842756758]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_tefeu")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("4_o6xl0")
+theme_override_styles/pressed = ExtResource("5_tipki")
+theme_override_styles/hover = ExtResource("6_85g3d")
+text = "Back"
+
+[node name="TextureRect" type="TextureRect" parent="GUI/RecordsScreen/VBoxContainer/BackToMainScreenFromRecords" unique_id=1979636688]
+layout_mode = 1
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("9_85g3d")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="SettingsMenu" type="MarginContainer" parent="GUI" unique_id=6146945 node_paths=PackedStringArray("vibration_checkbox", "master_volume_slider", "music_volume_slider", "background_style_option")]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+script = ExtResource("20_sttng")
+vibration_checkbox = NodePath("Settings/ScrollContainer/SettingsList/HapticsPanel/MarginContainer/HBoxContainer/VibrationCheckBox")
+master_volume_slider = NodePath("Settings/ScrollContainer/SettingsList/AudioPanel/MarginContainer/VBoxContainer/MasterVolume")
+music_volume_slider = NodePath("Settings/ScrollContainer/SettingsList/AudioPanel/MarginContainer/VBoxContainer/MusicVolume")
+background_style_option = NodePath("Settings/ScrollContainer/SettingsList/BackgroundPanel/MarginContainer/VBoxContainer/BackgroundStyleOption")
+
+[node name="Settings" type="VBoxContainer" parent="GUI/SettingsMenu" unique_id=1389761215]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ScrollContainer" type="ScrollContainer" parent="GUI/SettingsMenu/Settings" unique_id=1693224890]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SettingsList" type="VBoxContainer" parent="GUI/SettingsMenu/Settings/ScrollContainer" unique_id=1376415012]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="AudioPanel" type="PanelContainer" parent="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList" unique_id=364558979]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("10_eb6dy")
+
+[node name="MarginContainer" type="MarginContainer" parent="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList/AudioPanel" unique_id=345107285]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList/AudioPanel/MarginContainer" unique_id=1719289101]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="SoundLabel" type="Label" parent="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList/AudioPanel/MarginContainer/VBoxContainer" unique_id=812060489]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_tefeu")
+theme_override_font_sizes/font_size = 18
+text = "Sound"
+
+[node name="MasterVolume" type="HSlider" parent="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList/AudioPanel/MarginContainer/VBoxContainer" unique_id=764967459]
+layout_mode = 2
+theme_override_styles/slider = ExtResource("15_gqmmt")
+theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_pm3ni")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_y6deb")
+max_value = 1.0
+step = 0.01
+value = 1.0
+tick_count = 10
+ticks_position = 3
+
+[node name="MusicLabel" type="Label" parent="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList/AudioPanel/MarginContainer/VBoxContainer" unique_id=1249236188]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_tefeu")
+theme_override_font_sizes/font_size = 18
+text = "Music"
+
+[node name="MusicVolume" type="HSlider" parent="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList/AudioPanel/MarginContainer/VBoxContainer" unique_id=1723492712]
+layout_mode = 2
+theme_override_styles/slider = ExtResource("15_gqmmt")
+theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_og1vs")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_2wyq8")
+max_value = 1.0
+step = 0.01
+value = 1.0
+tick_count = 10
+ticks_position = 3
+
+[node name="HapticsPanel" type="PanelContainer" parent="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList" unique_id=1354674526]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("10_eb6dy")
+
+[node name="MarginContainer" type="MarginContainer" parent="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList/HapticsPanel" unique_id=1705123423]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList/HapticsPanel/MarginContainer" unique_id=2103512569]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList/HapticsPanel/MarginContainer/HBoxContainer" unique_id=32631708]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("3_tefeu")
+theme_override_font_sizes/font_size = 18
+text = "Vibration"
+
+[node name="VibrationCheckBox" type="CheckButton" parent="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList/HapticsPanel/MarginContainer/HBoxContainer" unique_id=718909065]
+layout_mode = 2
+button_pressed = true
+
+[node name="BackgroundPanel" type="PanelContainer" parent="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList" unique_id=826455961]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("10_eb6dy")
+
+[node name="MarginContainer" type="MarginContainer" parent="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList/BackgroundPanel" unique_id=1086885403]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList/BackgroundPanel/MarginContainer" unique_id=1391075231]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList/BackgroundPanel/MarginContainer/VBoxContainer" unique_id=158243088]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_tefeu")
+theme_override_font_sizes/font_size = 18
+text = "Background style"
+
+[node name="BackgroundStyleOption" type="OptionButton" parent="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList/BackgroundPanel/MarginContainer/VBoxContainer" unique_id=596502122]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("11_trceg")
+theme_override_font_sizes/font_size = 16
+item_count = 2
+popup/item_0/text = "Gradient"
+popup/item_0/id = 0
+popup/item_1/text = "Clouds"
+popup/item_1/id = 1
+
+[node name="HSeparator" type="HSeparator" parent="GUI/SettingsMenu/Settings" unique_id=405490201]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_dp3eg")
+
+[node name="BackToMainFromSettings" type="Button" parent="GUI/SettingsMenu/Settings" unique_id=1966581423]
+layout_mode = 2
+theme_override_constants/icon_max_width = 24
+theme_override_fonts/font = ExtResource("3_tefeu")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("4_o6xl0")
+theme_override_styles/pressed = ExtResource("5_tipki")
+theme_override_styles/hover = ExtResource("6_85g3d")
+text = "Back"
+
+[node name="TextureRect" type="TextureRect" parent="GUI/SettingsMenu/Settings/BackToMainFromSettings" unique_id=2073149296]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("9_85g3d")
+expand_mode = 4
+
+[node name="AboutMenu" type="MarginContainer" parent="GUI" unique_id=-1194967295 node_paths=PackedStringArray("rules_label", "info_label")]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+script = ExtResource("21_about")
+rules_label = NodePath("About/PanelContainer/MarginContainer/AboutTabs/Rules/RulesText")
+info_label = NodePath("About/PanelContainer/MarginContainer/AboutTabs/Info/InfoText")
+
+[node name="About" type="VBoxContainer" parent="GUI/AboutMenu" unique_id=-1194967294]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="PanelContainer" type="PanelContainer" parent="GUI/AboutMenu/About" unique_id=2106900943]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("10_eb6dy")
+
+[node name="MarginContainer" type="MarginContainer" parent="GUI/AboutMenu/About/PanelContainer" unique_id=1420562555]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="AboutTabs" type="TabContainer" parent="GUI/AboutMenu/About/PanelContainer/MarginContainer" unique_id=1916190029]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/side_margin = 10
+theme_override_fonts/font = ExtResource("11_trceg")
+theme_override_font_sizes/font_size = 16
+current_tab = 0
+
+[node name="Rules" type="MarginContainer" parent="GUI/AboutMenu/About/PanelContainer/MarginContainer/AboutTabs" unique_id=190268880]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+metadata/_tab_index = 0
+
+[node name="RulesText" type="RichTextLabel" parent="GUI/AboutMenu/About/PanelContainer/MarginContainer/AboutTabs/Rules" unique_id=1025014676]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("11_trceg")
+theme_override_font_sizes/normal_font_size = 14
+bbcode_enabled = true
+
+[node name="Info" type="MarginContainer" parent="GUI/AboutMenu/About/PanelContainer/MarginContainer/AboutTabs" unique_id=1008613881]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+metadata/_tab_index = 1
+
+[node name="InfoText" type="RichTextLabel" parent="GUI/AboutMenu/About/PanelContainer/MarginContainer/AboutTabs/Info" unique_id=2106346129]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("11_trceg")
+theme_override_font_sizes/normal_font_size = 14
+bbcode_enabled = true
+
+[node name="BackToMainFromAbout" type="Button" parent="GUI/AboutMenu/About" unique_id=-1194967289]
+layout_mode = 2
+theme_override_constants/icon_max_width = 24
+theme_override_fonts/font = ExtResource("3_tefeu")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("4_o6xl0")
+theme_override_styles/pressed = ExtResource("5_tipki")
+theme_override_styles/hover = ExtResource("6_85g3d")
+text = "Back"
+
+[node name="TextureRect" type="TextureRect" parent="GUI/AboutMenu/About/BackToMainFromAbout" unique_id=-1194967288]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("9_85g3d")
+expand_mode = 4
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="." unique_id=1524826175]
+stream = ExtResource("17_dp3eg")
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="." unique_id=1567956354]
+stream = ExtResource("18_dp3eg")
+autoplay = true
+bus = &"Music"
+parameters/looping = true
+
+[connection signal="pressed" from="GUI/MainMenu/MainMenu/NewGame" to="." method="_on_new_game_pressed"]
+[connection signal="pressed" from="GUI/MainMenu/MainMenu/NewGame" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="GUI/MainMenu/MainMenu/Records" to="." method="_on_records_pressed"]
+[connection signal="pressed" from="GUI/MainMenu/MainMenu/Records" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="GUI/MainMenu/MainMenu/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="GUI/MainMenu/MainMenu/Settings" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="GUI/MainMenu/MainMenu/About" to="." method="_on_about_pressed"]
+[connection signal="pressed" from="GUI/MainMenu/MainMenu/About" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="GUI/MainMenu/MainMenu/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="toggled" from="GUI/NewGameMenu/NewGame/NoGuessPanel/MarginContainer/HBoxContainer/NoGuessCheckBox" to="GUI/NewGameMenu" method="_on_no_guess_toggled"]
+[connection signal="pressed" from="GUI/NewGameMenu/NewGame/EasyMode" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="GUI/NewGameMenu/NewGame/EasyMode" to="GUI/NewGameMenu" method="_on_easy_mode_pressed"]
+[connection signal="pressed" from="GUI/NewGameMenu/NewGame/NormalMode" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="GUI/NewGameMenu/NewGame/NormalMode" to="GUI/NewGameMenu" method="_on_normal_mode_pressed"]
+[connection signal="pressed" from="GUI/NewGameMenu/NewGame/HardMode" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="GUI/NewGameMenu/NewGame/HardMode" to="GUI/NewGameMenu" method="_on_hard_mode_pressed"]
+[connection signal="pressed" from="GUI/NewGameMenu/NewGame/CustomMode" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="GUI/NewGameMenu/NewGame/CustomMode" to="." method="_on_custom_mode_pressed"]
+[connection signal="pressed" from="GUI/NewGameMenu/NewGame/BackToMainMenu" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="GUI/NewGameMenu/NewGame/BackToMainMenu" to="." method="_on_back_to_main_menu_pressed"]
+[connection signal="value_changed" from="GUI/CustomGameMenu/CustomGame/PanelContainer/MarginContainer/VBoxContainer/HSlider" to="GUI/CustomGameMenu" method="_on_size_changed"]
+[connection signal="value_changed" from="GUI/CustomGameMenu/CustomGame/PanelContainer2/MarginContainer/VBoxContainer/HSlider" to="GUI/CustomGameMenu" method="_on_density_changed"]
+[connection signal="toggled" from="GUI/CustomGameMenu/CustomGame/NoGuessPanel/MarginContainer/VBoxContainer/HBoxContainer/NoGuessCheckBox" to="GUI/CustomGameMenu" method="_on_no_guess_toggled"]
+[connection signal="pressed" from="GUI/CustomGameMenu/CustomGame/Start Game" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="GUI/CustomGameMenu/CustomGame/Start Game" to="GUI/CustomGameMenu" method="_on_start_game_pressed"]
+[connection signal="pressed" from="GUI/CustomGameMenu/CustomGame/BackToNewGameMenu" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="GUI/CustomGameMenu/CustomGame/BackToNewGameMenu" to="." method="_on_back_to_new_game_menu_pressed"]
+[connection signal="visibility_changed" from="GUI/RecordsScreen" to="GUI/RecordsScreen" method="_on_visibility_changed"]
+[connection signal="pressed" from="GUI/RecordsScreen/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Custom/VBoxContainer/HBoxContainer/VBoxContainer/SortingField" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="GUI/RecordsScreen/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Custom/VBoxContainer/HBoxContainer/VBoxContainer2/SortingOrder" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="GUI/RecordsScreen/VBoxContainer/BackToMainScreenFromRecords" to="." method="_on_back_to_main_screen_from_records_pressed"]
+[connection signal="pressed" from="GUI/RecordsScreen/VBoxContainer/BackToMainScreenFromRecords" to="." method="_on_button_pressed"]
+[connection signal="value_changed" from="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList/AudioPanel/MarginContainer/VBoxContainer/MasterVolume" to="GUI/SettingsMenu" method="_on_master_volume_changed"]
+[connection signal="value_changed" from="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList/AudioPanel/MarginContainer/VBoxContainer/MusicVolume" to="GUI/SettingsMenu" method="_on_music_volume_changed"]
+[connection signal="toggled" from="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList/HapticsPanel/MarginContainer/HBoxContainer/VibrationCheckBox" to="GUI/SettingsMenu" method="_on_vibration_toggled"]
+[connection signal="item_selected" from="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList/BackgroundPanel/MarginContainer/VBoxContainer/BackgroundStyleOption" to="GUI/SettingsMenu" method="_on_background_style_selected"]
+[connection signal="pressed" from="GUI/SettingsMenu/Settings/BackToMainFromSettings" to="." method="_on_back_to_main_from_settings_pressed"]
+[connection signal="pressed" from="GUI/SettingsMenu/Settings/BackToMainFromSettings" to="." method="_on_button_pressed"]
+[connection signal="meta_clicked" from="GUI/AboutMenu/About/PanelContainer/MarginContainer/AboutTabs/Rules/RulesText" to="GUI/AboutMenu" method="_on_meta_clicked"]
+[connection signal="meta_clicked" from="GUI/AboutMenu/About/PanelContainer/MarginContainer/AboutTabs/Info/InfoText" to="GUI/AboutMenu" method="_on_meta_clicked"]
+[connection signal="pressed" from="GUI/AboutMenu/About/BackToMainFromAbout" to="." method="_on_back_to_main_from_about_pressed"]
+[connection signal="pressed" from="GUI/AboutMenu/About/BackToMainFromAbout" to="." method="_on_button_pressed"]

@@ -1,0 +1,45 @@
+[gd_resource type="ParticleProcessMaterial" format=3 uid="uid://dphcx111udjcc"]
+
+[ext_resource type="Gradient" uid="uid://c1vpyisfevs6g" path="res://materials/particles/explosion_particle_color.tres" id="1_dfw7r"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_e0wks"]
+gradient = ExtResource("1_dfw7r")
+
+[sub_resource type="Curve" id="Curve_dfw7r"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_e0wks"]
+_limits = [0.0, 3.0, 0.0, 1.0]
+_data = [Vector2(0, 3), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_exxhp"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_5laph"]
+curve_x = SubResource("Curve_dfw7r")
+curve_y = SubResource("Curve_e0wks")
+curve_z = SubResource("Curve_exxhp")
+
+[resource]
+particle_flag_align_y = true
+emission_shape_offset = Vector3(0, -0.3, 0)
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 0.2
+emission_ring_radius = 0.4
+emission_ring_inner_radius = 0.3
+emission_ring_cone_angle = 90.0
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+radial_accel_min = 49.999996
+radial_accel_max = 89.99999
+scale_min = 0.19999999
+scale_max = 0.5
+scale_curve = SubResource("CurveXYZTexture_5laph")
+color_ramp = SubResource("GradientTexture1D_e0wks")
+collision_mode = 1
+collision_friction = 0.26
+collision_bounce = 0.65

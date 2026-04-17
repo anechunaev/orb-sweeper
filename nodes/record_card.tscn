@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://dqv0c1ecgcyq2"]
+
+[ext_resource type="Script" uid="uid://wq3l7sllj6bx" path="res://scripts/ui/record_card.gd" id="1_oad6m"]
+[ext_resource type="FontFile" uid="uid://dtfsqrve0jhsg" path="res://fonts/Tomorrow/Tomorrow-SemiBold.ttf" id="2_5wtek"]
+[ext_resource type="FontFile" uid="uid://cu7kew5uh63oj" path="res://fonts/Tomorrow/Tomorrow-Regular.ttf" id="3_d6p18"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_muem4"]
+color = Color(1, 1, 1, 0.1254902)
+grow_begin = -10.0
+grow_end = -10.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dp3eg"]
+
+[node name="RecordCard" type="VBoxContainer" unique_id=1460981375 node_paths=PackedStringArray("difficulty_label", "time_label", "dif_key_label", "date_label")]
+theme_override_constants/separation = 2
+script = ExtResource("1_oad6m")
+difficulty_label = NodePath("HBoxContainer/Difficulty")
+time_label = NodePath("HBoxContainer/Time")
+dif_key_label = NodePath("HBoxContainer2/Key")
+date_label = NodePath("HBoxContainer2/Date")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=555227063]
+layout_mode = 2
+
+[node name="Difficulty" type="Label" parent="HBoxContainer" unique_id=291345911]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_5wtek")
+text = "Easy"
+
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer" unique_id=109021920]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxLine_muem4")
+
+[node name="Time" type="Label" parent="HBoxContainer" unique_id=1020268241]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_d6p18")
+text = "--- sec"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="." unique_id=268450978]
+layout_mode = 2
+
+[node name="Key" type="Label" parent="HBoxContainer2" unique_id=1061134045]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.5019608)
+theme_override_fonts/font = ExtResource("3_d6p18")
+theme_override_font_sizes/font_size = 14
+text = "d=15% s=3"
+
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer2" unique_id=1846723486]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_dp3eg")
+
+[node name="Date" type="Label" parent="HBoxContainer2" unique_id=100038907]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.5019608)
+theme_override_fonts/font = ExtResource("3_d6p18")
+theme_override_font_sizes/font_size = 14
+text = "---"

@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://d0ruu3o38qcbc"]
+
+[ext_resource type="Texture2D" uid="uid://dig4ffm0ryjb1" path="res://textures/blast.png" id="1_d8ki2"]
+
+[node name="Blast" type="Decal" unique_id=1562779169]
+size = Vector3(5, 2, 5)
+texture_albedo = ExtResource("1_d8ki2")
+distance_fade_enabled = true
+distance_fade_begin = 50.0

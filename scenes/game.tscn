@@ -1,0 +1,695 @@
+[gd_scene format=3 uid="uid://gi5siq4fgd6y"]
+
+[ext_resource type="Script" uid="uid://de5mili85f02j" path="res://scripts/game/spherical_minesweeper.gd" id="1_5newe"]
+[ext_resource type="Shader" uid="uid://cop30b0b0knjn" path="res://shaders/goldberg_cell.gdshader" id="2_37s47"]
+[ext_resource type="Shader" uid="uid://bx2cxo3lvtrts" path="res://shaders/cell_number.gdshader" id="3_bt5mj"]
+[ext_resource type="Shader" uid="uid://bbm14ik43fmb1" path="res://shaders/flag.gdshader" id="4_e1j6l"]
+[ext_resource type="Shader" uid="uid://b87g5uf8824jh" path="res://shaders/mine.gdshader" id="5_pl11u"]
+[ext_resource type="ArrayMesh" uid="uid://b5s87hssu7nh1" path="res://objects/minesweeper_mine.obj" id="6_bhx41"]
+[ext_resource type="Material" uid="uid://dpaenm7suh414" path="res://materials/core.tres" id="7_qnb83"]
+[ext_resource type="Script" uid="uid://kojq6kufvkvs" path="res://scripts/rendering/orbit_camera.gd" id="8_sww3w"]
+[ext_resource type="Texture2D" uid="uid://dlese5gl55iet" path="res://textures/grad1.png" id="9_suyxu"]
+[ext_resource type="Script" uid="uid://qrssnq420tpm" path="res://scripts/ui/status_bar.gd" id="10_sgl2t"]
+[ext_resource type="StyleBox" uid="uid://bi5ajqhvvfide" path="res://ui_styles/game_ui_box_flat.tres" id="11_qouja"]
+[ext_resource type="Texture2D" uid="uid://bkkx2yy2cw5x0" path="res://textures/icon_bomb.svg" id="12_wljb1"]
+[ext_resource type="LabelSettings" uid="uid://bnov46sgi1h14" path="res://fonts/label_settings.tres" id="13_v2yb1"]
+[ext_resource type="Texture2D" uid="uid://b4is0p4epxhq" path="res://textures/icon_timer.svg" id="14_js0lu"]
+[ext_resource type="FontFile" uid="uid://dtfsqrve0jhsg" path="res://fonts/Tomorrow/Tomorrow-SemiBold.ttf" id="15_gxtfn"]
+[ext_resource type="StyleBox" uid="uid://cooutr63if5vl" path="res://ui_styles/game_ui_button.tres" id="16_twgab"]
+[ext_resource type="StyleBox" uid="uid://bb8s1p1gue47" path="res://ui_styles/game_ui_button_pressed.tres" id="17_02fa5"]
+[ext_resource type="StyleBox" uid="uid://ca56tcdv6r7l8" path="res://ui_styles/game_ui_button_hover.tres" id="18_nepv3"]
+[ext_resource type="Texture2D" uid="uid://varux5n6artn" path="res://textures/icon_menu.svg" id="19_7025r"]
+[ext_resource type="FontFile" uid="uid://cu7kew5uh63oj" path="res://fonts/Tomorrow/Tomorrow-Regular.ttf" id="20_m4url"]
+[ext_resource type="Texture2D" uid="uid://d4kg3j5u1vaxp" path="res://textures/confetti3.png" id="21_8ool0"]
+[ext_resource type="Texture2D" uid="uid://d3xhelk1rg0cc" path="res://textures/icon_close.svg" id="21_37s47"]
+[ext_resource type="AudioStream" uid="uid://bj7wp183r8mur" path="res://sounds/ui_won.mp3" id="23_e1j6l"]
+[ext_resource type="AudioStream" uid="uid://xocpm4kyqtms" path="res://sounds/ui_click.mp3" id="23_pl11u"]
+[ext_resource type="AudioStream" uid="uid://dhhns4wu4ras1" path="res://sounds/ui_chord.wav" id="23_qnb83"]
+[ext_resource type="AudioStream" uid="uid://6wia83gol3w0" path="res://sounds/ui_lost.mp3" id="24_pl11u"]
+[ext_resource type="AudioStream" uid="uid://dv4y3sfmgdib6" path="res://sounds/ui_reveal.mp3" id="24_suyxu"]
+[ext_resource type="AudioStream" uid="uid://b06nnqkivgpd6" path="res://sounds/ui_flag.wav" id="24_sww3w"]
+[ext_resource type="AudioStream" uid="uid://d2bgtj07ytysv" path="res://sounds/ui_stop.mp3" id="27_suyxu"]
+[ext_resource type="Shader" uid="uid://b7wqkomje0vcf" path="res://shaders/outline3.gdshader" id="28_outln"]
+[ext_resource type="Script" uid="uid://dqtmaqrnce5c0" path="res://scripts/game/game_input_handler.gd" id="29_input"]
+[ext_resource type="Script" uid="uid://petx80oceqpb" path="res://scripts/game/game_menu_controller.gd" id="30_menu"]
+[ext_resource type="Script" uid="uid://cw0soi7hjx6og" path="res://scripts/ui/no_guess_hud.gd" id="31_nghud"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ajshl"]
+panorama = ExtResource("9_suyxu")
+
+[sub_resource type="SphereMesh" id="SphereMesh_jcd4p"]
+radial_segments = 7
+rings = 7
+
+[sub_resource type="Sky" id="Sky_5newe"]
+sky_material = SubResource("PanoramaSkyMaterial_ajshl")
+
+[sub_resource type="Environment" id="Environment_at5dv"]
+background_mode = 2
+background_energy_multiplier = 0.7
+sky = SubResource("Sky_5newe")
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.3
+reflected_light_source = 2
+glow_enabled = true
+glow_intensity = 0.92
+glow_strength = 1.41
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_jcd4p"]
+
+[sub_resource type="Compositor" id="Compositor_uacia"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ng_red"]
+bg_color = Color(0.7, 0.18, 0.18, 0.8784314)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ng_green"]
+bg_color = Color(0.18, 0.55, 0.25, 0.8784314)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v2yb1"]
+bg_color = Color(0.1554595, 0.094930984, 0.01317465, 0.8784314)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_c6rvn"]
+color = Color(1, 1, 1, 0.1254902)
+grow_begin = -10.0
+grow_end = -10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n74k2"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(0.16078432, 0.078431375, 0.078431375, 0.8784314)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_si7kk"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(0.09019608, 0.02745098, 0.02745098, 0.8784314)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pn65j"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(0.2509804, 0.12156863, 0.12156863, 0.8784314)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5f8cm"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(0.2509804, 0.12156863, 0.12156863, 0.8784314)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 5
+
+[sub_resource type="Curve" id="Curve_daiq8"]
+_data = [Vector2(0.7080537, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_c6rvn"]
+curve = SubResource("Curve_daiq8")
+
+[sub_resource type="Curve" id="Curve_n74k2"]
+_data = [Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="CurveTexture" id="CurveTexture_si7kk"]
+curve = SubResource("Curve_n74k2")
+
+[sub_resource type="Curve" id="Curve_pn65j"]
+_limits = [0.0, 50.0, 0.0, 1.0]
+_data = [Vector2(0, 50), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_5f8cm"]
+curve = SubResource("Curve_pn65j")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_daiq8"]
+lifetime_randomness = 0.35
+particle_flag_align_y = true
+particle_flag_rotate_y = true
+particle_flag_disable_z = true
+emission_shape = 2
+emission_sphere_radius = 128.0
+gravity = Vector3(0, 980, 0)
+radial_accel_min = -2.2351742e-06
+radial_accel_max = 29.999996
+radial_accel_curve = SubResource("CurveTexture_5f8cm")
+attractor_interaction_enabled = false
+color = Color(1, 0, 0, 1)
+alpha_curve = SubResource("CurveTexture_c6rvn")
+emission_curve = SubResource("CurveTexture_si7kk")
+hue_variation_min = -1.0
+hue_variation_max = 0.99999994
+turbulence_enabled = true
+turbulence_noise_strength = 10.89
+turbulence_noise_scale = 0.535
+turbulence_influence_min = 0.028
+turbulence_influence_max = 0.155
+turbulence_initial_displacement_min = -100.0
+turbulence_initial_displacement_max = 100.0
+
+[node name="GameManager" type="Node3D" unique_id=1195969783 node_paths=PackedStringArray("sound_click", "sound_chord", "sound_flag", "sound_reveal", "sound_stop", "sound_won", "sound_lost", "mesh_instance", "camera", "input_handler", "menu_controller", "core_sphere", "game_ui_timer", "winning_ps")]
+script = ExtResource("1_5newe")
+sound_click = NodePath("UIClick")
+sound_chord = NodePath("UIChord")
+sound_flag = NodePath("UIFlag")
+sound_reveal = NodePath("UIReveal")
+sound_stop = NodePath("UIStop")
+sound_won = NodePath("UIWon")
+sound_lost = NodePath("UILost")
+sky_material = SubResource("PanoramaSkyMaterial_ajshl")
+mesh_instance = NodePath("MeshInstance3D")
+camera = NodePath("Camera3D")
+input_handler = NodePath("GameInputHandler")
+menu_controller = NodePath("GameMenuController")
+shader = ExtResource("2_37s47")
+number_shader = ExtResource("3_bt5mj")
+flag_shader = ExtResource("4_e1j6l")
+mine_shader = ExtResource("5_pl11u")
+outline_shader = ExtResource("28_outln")
+mine_mesh = ExtResource("6_bhx41")
+core_sphere = NodePath("CoreSphere")
+game_ui_timer = NodePath("UIUpdateStep")
+winning_ps = NodePath("Confetti/GPUParticles2D")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=71296469]
+cast_shadow = 0
+gi_mode = 0
+
+[node name="CoreSphere" type="MeshInstance3D" parent="." unique_id=199776069]
+mesh = SubResource("SphereMesh_jcd4p")
+surface_material_override/0 = ExtResource("7_qnb83")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1798508332]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+script = ExtResource("8_sww3w")
+min_distance = 12.0
+max_distance = 50.0
+wheel_zoom_step = 0.2
+
+[node name="FrontLight" type="DirectionalLight3D" parent="." unique_id=1932654459]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -200, 0, 0)
+light_color = Color(0.9999997, 0.9117137, 0.82177347, 1)
+light_energy = 0.6
+light_specular = 0.5
+light_bake_mode = 0
+shadow_enabled = true
+
+[node name="BackLight" type="DirectionalLight3D" parent="." unique_id=1509253835]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -201, 0, 0)
+light_color = Color(0.75773317, 1, 0.9926682, 1)
+light_energy = 0.6
+light_specular = 0.5
+light_bake_mode = 0
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1588677313]
+environment = SubResource("Environment_at5dv")
+camera_attributes = SubResource("CameraAttributesPractical_jcd4p")
+compositor = SubResource("Compositor_uacia")
+
+[node name="TopContainer" type="MarginContainer" parent="." unique_id=1241870238 node_paths=PackedStringArray("game_manager", "label_mines", "label_timer", "no_guess_indicator", "no_guess_label")]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 64.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+script = ExtResource("10_sgl2t")
+game_manager = NodePath("..")
+label_mines = NodePath("HBoxContainer/Panel/MarginContainer/HBoxContainer/LabelMines")
+label_timer = NodePath("HBoxContainer/Panel2/MarginContainer/HBoxContainer/LabelTimer")
+no_guess_indicator = NodePath("HBoxContainer/NoGuessIndicator")
+no_guess_label = NodePath("HBoxContainer/NoGuessIndicator/NoGuessLabel")
+ng_style_red = SubResource("StyleBoxFlat_ng_red")
+ng_style_green = SubResource("StyleBoxFlat_ng_green")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TopContainer" unique_id=666888190]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Panel" type="Panel" parent="TopContainer/HBoxContainer" unique_id=1354541274]
+clip_contents = true
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("11_qouja")
+
+[node name="MarginContainer" type="MarginContainer" parent="TopContainer/HBoxContainer/Panel" unique_id=1578629450]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TopContainer/HBoxContainer/Panel/MarginContainer" unique_id=921134948]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="TextureRect" type="TextureRect" parent="TopContainer/HBoxContainer/Panel/MarginContainer/HBoxContainer" unique_id=1503003135]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource("12_wljb1")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="LabelMines" type="Label" parent="TopContainer/HBoxContainer/Panel/MarginContainer/HBoxContainer" unique_id=1112298755]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 18
+text = "0"
+label_settings = ExtResource("13_v2yb1")
+horizontal_alignment = 2
+
+[node name="NoGuessIndicator" type="Panel" parent="TopContainer/HBoxContainer" unique_id=1241870240]
+custom_minimum_size = Vector2(44, 44)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_ng_red")
+
+[node name="NoGuessLabel" type="Label" parent="TopContainer/HBoxContainer/NoGuessIndicator" unique_id=1241870241]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("15_gxtfn")
+theme_override_font_sizes/font_size = 16
+text = "G"
+label_settings = ExtResource("13_v2yb1")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel2" type="Panel" parent="TopContainer/HBoxContainer" unique_id=1641559787]
+clip_contents = true
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("11_qouja")
+
+[node name="MarginContainer" type="MarginContainer" parent="TopContainer/HBoxContainer/Panel2" unique_id=221286086]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TopContainer/HBoxContainer/Panel2/MarginContainer" unique_id=1290698560]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="TextureRect" type="TextureRect" parent="TopContainer/HBoxContainer/Panel2/MarginContainer/HBoxContainer" unique_id=107255593]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource("14_js0lu")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="LabelTimer" type="Label" parent="TopContainer/HBoxContainer/Panel2/MarginContainer/HBoxContainer" unique_id=503629892]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0"
+label_settings = ExtResource("13_v2yb1")
+horizontal_alignment = 2
+
+[node name="NoGuessHud" type="MarginContainer" parent="." unique_id=961776305 node_paths=PackedStringArray("game", "generating_label", "warning_label")]
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 70.0
+offset_bottom = 270.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+script = ExtResource("31_nghud")
+game = NodePath("..")
+generating_label = NodePath("VBox/GeneratingPanel")
+warning_label = NodePath("VBox/WarningPanel")
+
+[node name="VBox" type="VBoxContainer" parent="NoGuessHud" unique_id=1073215801]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="GeneratingPanel" type="PanelContainer" parent="NoGuessHud/VBox" unique_id=1023265067]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("11_qouja")
+
+[node name="Margin" type="MarginContainer" parent="NoGuessHud/VBox/GeneratingPanel" unique_id=1073215803]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="GeneratingLabel" type="Label" parent="NoGuessHud/VBox/GeneratingPanel/Margin" unique_id=1073215804]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("15_gxtfn")
+theme_override_font_sizes/font_size = 16
+text = "Generating safe board…"
+horizontal_alignment = 1
+
+[node name="WarningPanel" type="PanelContainer" parent="NoGuessHud/VBox" unique_id=1354975007]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_v2yb1")
+
+[node name="Margin" type="MarginContainer" parent="NoGuessHud/VBox/WarningPanel" unique_id=1073215806]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 8
+
+[node name="WarningLabel" type="Label" parent="NoGuessHud/VBox/WarningPanel/Margin" unique_id=1073215807]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.8666667, 0.47058824, 1)
+theme_override_fonts/font = ExtResource("15_gxtfn")
+theme_override_font_sizes/font_size = 16
+text = "NG generator gave up.
+Board may need a guess."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="BottomContainer" type="MarginContainer" parent="." unique_id=1073215743]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -76.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="BottomContainer" unique_id=2128748221]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="MenuButton" type="Button" parent="BottomContainer/HBoxContainer" unique_id=593478495]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/h_separation = 16
+theme_override_constants/icon_max_width = 24
+theme_override_fonts/font = ExtResource("15_gxtfn")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("16_twgab")
+theme_override_styles/pressed = ExtResource("17_02fa5")
+theme_override_styles/hover = ExtResource("18_nepv3")
+theme_override_styles/hover_pressed = ExtResource("17_02fa5")
+text = "Menu"
+icon = ExtResource("19_7025r")
+alignment = 0
+
+[node name="NewGameButton" type="Button" parent="BottomContainer/HBoxContainer" unique_id=116161871]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/h_separation = 16
+theme_override_constants/icon_max_width = 24
+theme_override_fonts/font = ExtResource("15_gxtfn")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("16_twgab")
+theme_override_styles/pressed = ExtResource("17_02fa5")
+theme_override_styles/hover = ExtResource("18_nepv3")
+theme_override_styles/hover_pressed = ExtResource("17_02fa5")
+text = "New Game"
+icon = ExtResource("12_wljb1")
+alignment = 2
+icon_alignment = 2
+
+[node name="Menu" type="MarginContainer" parent="." unique_id=1417759874]
+visible = false
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -159.5
+offset_bottom = 159.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 6
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Panel" type="Panel" parent="Menu" unique_id=1782562036]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("11_qouja")
+
+[node name="MarginContainer" type="MarginContainer" parent="Menu" unique_id=651753066]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Menu" type="VBoxContainer" parent="Menu/MarginContainer" unique_id=1896527329]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 24
+
+[node name="Status" type="Label" parent="Menu/MarginContainer/Menu" unique_id=1123361975]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("15_gxtfn")
+theme_override_font_sizes/font_size = 32
+text = "You won!"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Menu/MarginContainer/Menu" unique_id=1267359987]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="Label" type="Label" parent="Menu/MarginContainer/Menu/HBoxContainer" unique_id=601132825]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("20_m4url")
+theme_override_font_sizes/font_size = 18
+text = "Time"
+
+[node name="HSeparator" type="HSeparator" parent="Menu/MarginContainer/Menu/HBoxContainer" unique_id=1751997729]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxLine_c6rvn")
+
+[node name="MenuCurrentTime" type="Label" parent="Menu/MarginContainer/Menu/HBoxContainer" unique_id=93423505]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("20_m4url")
+theme_override_font_sizes/font_size = 18
+text = "--- sec"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Menu/MarginContainer/Menu" unique_id=1859204466]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="Menu/MarginContainer/Menu/HBoxContainer3" unique_id=285348286]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("20_m4url")
+theme_override_font_sizes/font_size = 18
+text = "Difficulty"
+
+[node name="HSeparator" type="HSeparator" parent="Menu/MarginContainer/Menu/HBoxContainer3" unique_id=1228267696]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxLine_c6rvn")
+
+[node name="MenuDifficultyParams" type="Label" parent="Menu/MarginContainer/Menu/HBoxContainer3" unique_id=1764162389]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.5019608)
+theme_override_fonts/font = ExtResource("20_m4url")
+theme_override_font_sizes/font_size = 16
+text = "d=0.2 s=5"
+
+[node name="MenuDifficultyName" type="Label" parent="Menu/MarginContainer/Menu/HBoxContainer3" unique_id=469897240]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("20_m4url")
+theme_override_font_sizes/font_size = 18
+text = "Hardestest"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Menu/MarginContainer/Menu" unique_id=497233255]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="Label" type="Label" parent="Menu/MarginContainer/Menu/HBoxContainer2" unique_id=882430765]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("20_m4url")
+theme_override_font_sizes/font_size = 18
+text = "Record"
+
+[node name="HSeparator" type="HSeparator" parent="Menu/MarginContainer/Menu/HBoxContainer2" unique_id=1527765179]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxLine_c6rvn")
+
+[node name="MenuRecord" type="Label" parent="Menu/MarginContainer/Menu/HBoxContainer2" unique_id=1077748832]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("20_m4url")
+theme_override_font_sizes/font_size = 18
+text = "--- sec"
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="Menu/MarginContainer/Menu" unique_id=17966093]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ExitButton" type="Button" parent="Menu/MarginContainer/Menu/HBoxContainer4" unique_id=230473572]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("15_gxtfn")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_n74k2")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_si7kk")
+theme_override_styles/hover = SubResource("StyleBoxFlat_pn65j")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_5f8cm")
+text = "Exit to Main Menu"
+
+[node name="CloseButton" type="Button" parent="Menu/MarginContainer/Menu/HBoxContainer4" unique_id=2002377537]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/icon_max_width = 24
+theme_override_fonts/font = ExtResource("15_gxtfn")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("16_twgab")
+theme_override_styles/pressed = ExtResource("17_02fa5")
+theme_override_styles/hover = ExtResource("18_nepv3")
+text = "Close"
+icon = ExtResource("21_37s47")
+alignment = 2
+icon_alignment = 2
+
+[node name="Confetti" type="CenterContainer" parent="." unique_id=1349318616]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+use_top_left = true
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Confetti" unique_id=827266004]
+position = Vector2(0, -100)
+emitting = false
+amount = 200
+texture = ExtResource("21_8ool0")
+lifetime = 2.5
+one_shot = true
+preprocess = 0.5
+explosiveness = 0.7
+visibility_rect = Rect2(-300, 0, 600, 800)
+draw_order = 0
+process_material = SubResource("ParticleProcessMaterial_daiq8")
+
+[node name="UIUpdateStep" type="Timer" parent="." unique_id=272920987]
+
+[node name="UIMenuDelay" type="Timer" parent="." unique_id=934156936]
+one_shot = true
+
+[node name="UIChord" type="AudioStreamPlayer" parent="." unique_id=2096678011]
+stream = ExtResource("23_qnb83")
+
+[node name="UIReveal" type="AudioStreamPlayer" parent="." unique_id=1459158030]
+stream = ExtResource("24_suyxu")
+
+[node name="UIFlag" type="AudioStreamPlayer" parent="." unique_id=1510283786]
+stream = ExtResource("24_sww3w")
+
+[node name="UIClick" type="AudioStreamPlayer" parent="." unique_id=1877845086]
+stream = ExtResource("23_pl11u")
+
+[node name="UIStop" type="AudioStreamPlayer" parent="." unique_id=1765862068]
+stream = ExtResource("27_suyxu")
+
+[node name="UIWon" type="AudioStreamPlayer" parent="." unique_id=1147888904]
+stream = ExtResource("23_e1j6l")
+
+[node name="UILost" type="AudioStreamPlayer" parent="." unique_id=1920068715]
+stream = ExtResource("24_pl11u")
+
+[node name="GameInputHandler" type="Node" parent="." unique_id=1026490786 node_paths=PackedStringArray("camera", "game", "menu_controller")]
+script = ExtResource("29_input")
+camera = NodePath("../Camera3D")
+game = NodePath("..")
+menu_controller = NodePath("../GameMenuController")
+
+[node name="GameMenuController" type="Node" parent="." unique_id=372588723 node_paths=PackedStringArray("game", "camera", "ui_menu", "ui_menu_status", "ui_menu_time", "ui_menu_difficulty_name", "ui_menu_difficulty_params", "ui_menu_record", "ui_exit_button", "menu_delay_timer")]
+script = ExtResource("30_menu")
+game = NodePath("..")
+camera = NodePath("../Camera3D")
+ui_menu = NodePath("../Menu")
+ui_menu_status = NodePath("../Menu/MarginContainer/Menu/Status")
+ui_menu_time = NodePath("../Menu/MarginContainer/Menu/HBoxContainer/MenuCurrentTime")
+ui_menu_difficulty_name = NodePath("../Menu/MarginContainer/Menu/HBoxContainer3/MenuDifficultyName")
+ui_menu_difficulty_params = NodePath("../Menu/MarginContainer/Menu/HBoxContainer3/MenuDifficultyParams")
+ui_menu_record = NodePath("../Menu/MarginContainer/Menu/HBoxContainer2/MenuRecord")
+ui_exit_button = NodePath("../Menu/MarginContainer/Menu/HBoxContainer4/ExitButton")
+menu_delay_timer = NodePath("../UIMenuDelay")
+
+[connection signal="pressed" from="BottomContainer/HBoxContainer/MenuButton" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="BottomContainer/HBoxContainer/MenuButton" to="GameMenuController" method="_on_menu_button_pressed"]
+[connection signal="pressed" from="BottomContainer/HBoxContainer/NewGameButton" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="BottomContainer/HBoxContainer/NewGameButton" to="GameMenuController" method="_on_new_game_button_pressed"]
+[connection signal="pressed" from="Menu/MarginContainer/Menu/HBoxContainer4/ExitButton" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Menu/MarginContainer/Menu/HBoxContainer4/ExitButton" to="GameMenuController" method="_on_exit_to_main_menu_pressed"]
+[connection signal="pressed" from="Menu/MarginContainer/Menu/HBoxContainer4/CloseButton" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Menu/MarginContainer/Menu/HBoxContainer4/CloseButton" to="GameMenuController" method="_on_close_button_pressed"]

@@ -1,0 +1,57 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Orb Sweeper"
+config/description="Minesweeper on a hexagonal sphere (Goldberg Polyhedron)"
+run/main_scene="uid://cmrwhot781sgc"
+run/disable_stdout=true
+run/disable_stderr=true
+config/features=PackedStringArray("4.6", "Mobile")
+run/max_fps=60
+boot_splash/bg_color=Color(0.08712187, 0.14286193, 0.22442472, 1)
+boot_splash/image="uid://c15bxh1874ksw"
+
+[audio]
+
+buses/default_bus_layout="uid://d3vtgw2xt8tjj"
+
+[autoload]
+
+SettingsStore="*res://scripts/autoload/settings_store.gd"
+AudioManager="*res://scripts/autoload/audio_manager.gd"
+HapticsManager="*res://scripts/autoload/haptics_manager.gd"
+BackgroundManager="*res://scripts/autoload/background_manager.gd"
+GameConfig="*res://scripts/autoload/game_config.gd"
+RecordsManager="*uid://moliofp5hxb6"
+
+[display]
+
+window/size/viewport_width=400
+window/size/viewport_height=800
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+window/handheld/orientation=1
+
+[gui]
+
+common/default_scroll_deadzone=12
+
+[physics]
+
+3d/physics_engine="Jolt Physics"
+
+[rendering]
+
+rendering_device/driver.windows="d3d12"
+renderer/rendering_method="mobile"
+textures/vram_compression/import_etc2_astc=true
+environment/defaults/default_clear_color=Color(0.1738, 0.18689, 0.22, 1)

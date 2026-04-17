@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://b5s87hssu7nh1"
+path="res://.godot/imported/minesweeper_mine.obj-f3abb69e73e926c92d4aabb0e16b3717.mesh"
+
+[deps]
+
+files=["res://.godot/imported/minesweeper_mine.obj-f3abb69e73e926c92d4aabb0e16b3717.mesh"]
+
+source_file="res://objects/minesweeper_mine.obj"
+dest_files=["res://.godot/imported/minesweeper_mine.obj-f3abb69e73e926c92d4aabb0e16b3717.mesh", "res://.godot/imported/minesweeper_mine.obj-f3abb69e73e926c92d4aabb0e16b3717.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false
