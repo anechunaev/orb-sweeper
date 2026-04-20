@@ -11,7 +11,8 @@ config_version=5
 [application]
 
 config/name="Orb Sweeper"
-config/description="Minesweeper on a hexagonal sphere (Goldberg Polyhedron)"
+config/description="Spin the sphere, dodge the mines. A round twist on the classic puzzle."
+config/version="1"
 run/main_scene="uid://cmrwhot781sgc"
 run/disable_stdout=true
 run/disable_stderr=true
@@ -19,6 +20,7 @@ config/features=PackedStringArray("4.6", "Mobile")
 run/max_fps=60
 boot_splash/bg_color=Color(0.08712187, 0.14286193, 0.22442472, 1)
 boot_splash/image="uid://c15bxh1874ksw"
+config/icon="uid://pjyfhetxrvj1"
 
 [audio]
 

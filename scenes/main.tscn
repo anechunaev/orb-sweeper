@@ -191,7 +191,6 @@ texture = ExtResource("4_0ld40")
 expand_mode = 5
 
 [node name="MainMenu" type="MarginContainer" parent="GUI" unique_id=2095990837]
-visible = false
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 16
@@ -895,6 +894,7 @@ texture = ExtResource("9_85g3d")
 expand_mode = 4
 
 [node name="AboutMenu" type="MarginContainer" parent="GUI" unique_id=-1194967295 node_paths=PackedStringArray("rules_label", "info_label")]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 16
