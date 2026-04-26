@@ -471,6 +471,7 @@ func restart() -> void:
 	_final_time_usec = 0
 	_emit_stats()
 	_emit_tick()
+	game_ready.emit()
 
 	_explosion_spawner.clear()
 
