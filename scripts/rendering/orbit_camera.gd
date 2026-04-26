@@ -25,6 +25,16 @@ extends Camera3D
 @export var pinch_sensitivity: float = 0.02
 ## Mouse-wheel zoom step.
 @export var wheel_zoom_step: float = 0.5
+## Max gap (seconds) between the first tap release and the second tap press
+## that arms the one-finger-zoom gesture. Only used when
+## [member InputManager.one_finger_zoom_enabled] is true.
+@export var single_finger_double_tap_window: float = 0.25
+## How close (pixels) the second tap must land to the first tap's release for
+## the one-finger-zoom gesture to arm.
+@export var single_finger_double_tap_max_distance: float = 40.0
+## Multiplier from vertical pixel delta to zoom velocity for the one-finger
+## zoom drag. Negative motion (finger up) zooms in.
+@export var single_finger_zoom_sensitivity: float = 0.04
 
 ## How quickly rotation inertia decays (0 = instant stop, 0.98 = very floaty).
 @export_range(0.0, 0.99) var inertia_damping: float = 0.92
@@ -61,6 +71,12 @@ var _mouse_prev: Vector2   = Vector2.ZERO
 # -- pinch state --
 var _pinch_start_dist: float = 0.0
 
+# -- one-finger zoom gesture state --
+var _last_tap_release_time: float = -1.0
+var _last_tap_release_pos: Vector2 = Vector2.ZERO
+var _zoom_gesture_armed: bool = false
+var _zoom_gesture_active: bool = false
+
 var _is_dragging_enabled: bool = true
 
 ## Emitted once per gesture when a press crosses [member min_drag_distance]
@@ -71,6 +87,10 @@ signal pointer_pressed(position: Vector2)
 ## Emitted on pointer release. [param was_drag] is true if the gesture was
 ## classified as a drag (i.e. [signal drag_started] fired for it).
 signal pointer_released(was_drag: bool)
+## Emitted the moment a single-finger press is recognised as the second tap of
+## a one-finger-zoom gesture (before any drag). Listeners should cancel any
+## pending tap reveal / long-press flag for that press.
+signal zoom_gesture_started
 
 ## Reconfigure zoom distance and its min/max bounds in one call.
 func set_distance(dist: float, min_dist: float, max_dist: float) -> void:
@@ -93,7 +113,7 @@ func reset_position() -> void:
 ## Returns true while the user is actively dragging the camera (mouse or
 ## touch). Consumers use this to suppress clicks that happen during an orbit.
 func is_drag_active() -> bool:
-	return _mouse_dragging or _drag_confirmed
+	return _mouse_dragging or _drag_confirmed or _zoom_gesture_active
 
 func _ready() -> void:
 	reset_position()
@@ -132,16 +152,43 @@ func _unhandled_input(event: InputEvent) -> void:
 			if _touches.size() == 1:
 				_drag_origin    = te.position
 				_drag_confirmed = false
+				var arm_zoom := InputManager.one_finger_zoom_enabled \
+						and _last_tap_release_time >= 0.0 \
+						and Time.get_ticks_msec() / 1000.0 - _last_tap_release_time \
+								<= single_finger_double_tap_window \
+						and te.position.distance_to(_last_tap_release_pos) \
+								<= single_finger_double_tap_max_distance
+				if arm_zoom:
+					_zoom_gesture_armed = true
+					_last_tap_release_time = -1.0
+				# Always emit pointer_pressed first so its listener arms its own
+				# state; zoom_gesture_started then tells the listener to drop
+				# that state. Reversed, the press-armed state would survive.
 				pointer_pressed.emit(te.position)
+				if arm_zoom:
+					zoom_gesture_started.emit()
 			elif _touches.size() == 2:
 				_pinch_start_dist = _current_pinch_distance()
+				# A second finger overrides any pending one-finger-zoom gesture.
+				_zoom_gesture_armed = false
+				_zoom_gesture_active = false
 		else:
-			var was_drag := _drag_confirmed
+			var was_drag := _drag_confirmed or _zoom_gesture_armed or _zoom_gesture_active
+			var was_zoom_gesture := _zoom_gesture_armed or _zoom_gesture_active
 			_touches.erase(te.index)
 			_prev_touches.erase(te.index)
 			if _touches.size() == 0:
 				pointer_released.emit(was_drag)
 				_drag_confirmed = false
+				if was_zoom_gesture:
+					_zoom_gesture_armed = false
+					_zoom_gesture_active = false
+					_last_tap_release_time = -1.0
+				elif InputManager.one_finger_zoom_enabled and not was_drag:
+					_last_tap_release_time = Time.get_ticks_msec() / 1000.0
+					_last_tap_release_pos = te.position
+				else:
+					_last_tap_release_time = -1.0
 		get_viewport().set_input_as_handled()
 		return
 
@@ -199,6 +246,11 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _handle_single_drag(pos: Vector2, relative: Vector2) -> void:
+	if _zoom_gesture_armed or _zoom_gesture_active:
+		_zoom_gesture_active = true
+		_velocity_zoom += relative.y * single_finger_zoom_sensitivity
+		return
+
 	if not _drag_confirmed:
 		if pos.distance_to(_drag_origin) < min_drag_distance:
 			return

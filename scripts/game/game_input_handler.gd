@@ -16,10 +16,18 @@ signal face_flagged(face_index: int)
 @export_group("Input")
 ## Hold duration (seconds) for flag gesture on touch.
 @export var long_press_time: float = 0.4
+## When [member InputManager.one_finger_zoom_enabled] is true, a tap reveal is
+## held back this long so a fast follow-up press can promote it into the
+## one-finger-zoom gesture instead. Should match
+## [member OrbitCamera.single_finger_double_tap_window].
+@export var double_tap_window: float = 0.25
 
 var _press_start_time: float = 0.0
 var _press_face: int = -1
 var _awaiting_release: bool = false
+
+var _pending_reveal_face: int = -1
+var _pending_reveal_at: float = 0.0
 
 
 func _ready() -> void:
@@ -28,6 +36,8 @@ func _ready() -> void:
 			camera.pointer_released.connect(_on_pointer_released)
 			camera.pointer_pressed.connect(_on_pointer_pressed)
 			camera.drag_started.connect(_on_drag_started)
+		if camera.has_signal("zoom_gesture_started"):
+			camera.zoom_gesture_started.connect(_on_zoom_gesture_started)
 
 
 func _process(_delta: float) -> void:
@@ -36,6 +46,12 @@ func _process(_delta: float) -> void:
 			face_flagged.emit(_press_face)
 			_awaiting_release = false
 			_press_face = -1
+
+	if _pending_reveal_face >= 0 \
+			and Time.get_ticks_msec() / 1000.0 >= _pending_reveal_at:
+		var fi := _pending_reveal_face
+		_pending_reveal_face = -1
+		face_revealed.emit(fi)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -55,6 +71,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func cancel_input() -> void:
 	_awaiting_release = false
 	_press_face = -1
+	_pending_reveal_face = -1
 
 
 func _raycast(screen_pos: Vector2) -> int:
@@ -94,7 +111,22 @@ func _on_drag_started() -> void:
 	_press_face = -1
 
 
+func _on_zoom_gesture_started() -> void:
+	# A second-tap-and-hold has been claimed by [OrbitCamera] for one-finger
+	# zoom. Drop the pending tap reveal and any in-flight long-press so neither
+	# fires while the user is dragging to zoom.
+	_pending_reveal_face = -1
+	_awaiting_release = false
+	_press_face = -1
+
+
 func _on_pointer_pressed(screen_pos: Vector2) -> void:
+	# Any new press consumes a pending reveal: either the camera will promote
+	# this press into the zoom gesture (which clears it via
+	# `_on_zoom_gesture_started`), or this is just a fresh tap and the previous
+	# one is dropped — see `double_tap_window` docs.
+	_pending_reveal_face = -1
+
 	if game.phase == SphericalMinesweeper.GamePhase.WON \
 			or game.phase == SphericalMinesweeper.GamePhase.LOST:
 		return
@@ -129,7 +161,11 @@ func _on_pointer_released(was_drag: bool) -> void:
 			var fi := _press_face
 			_awaiting_release = false
 			_press_face = -1
-			face_revealed.emit(fi)
+			if InputManager.one_finger_zoom_enabled:
+				_pending_reveal_face = fi
+				_pending_reveal_at = Time.get_ticks_msec() / 1000.0 + double_tap_window
+			else:
+				face_revealed.emit(fi)
 		else:
 			_awaiting_release = false
 			_press_face = -1

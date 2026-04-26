@@ -191,6 +191,7 @@ texture = ExtResource("4_0ld40")
 expand_mode = 5
 
 [node name="MainMenu" type="MarginContainer" parent="GUI" unique_id=2095990837]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 16
@@ -735,8 +736,7 @@ texture = ExtResource("9_85g3d")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="SettingsMenu" type="MarginContainer" parent="GUI" unique_id=6146945 node_paths=PackedStringArray("vibration_checkbox", "master_volume_slider", "music_volume_slider", "background_style_option")]
-visible = false
+[node name="SettingsMenu" type="MarginContainer" parent="GUI" unique_id=6146945 node_paths=PackedStringArray("vibration_checkbox", "one_finger_zoom_checkbox", "master_volume_slider", "music_volume_slider", "background_style_option")]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 16
@@ -745,6 +745,7 @@ theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 script = ExtResource("20_sttng")
 vibration_checkbox = NodePath("Settings/ScrollContainer/SettingsList/HapticsPanel/MarginContainer/HBoxContainer/VibrationCheckBox")
+one_finger_zoom_checkbox = NodePath("Settings/ScrollContainer/SettingsList/OneFingerZoomPanel/MarginContainer/VBoxContainer/HBoxContainer/OneFingerZoomCheckBox")
 master_volume_slider = NodePath("Settings/ScrollContainer/SettingsList/AudioPanel/MarginContainer/VBoxContainer/MasterVolume")
 music_volume_slider = NodePath("Settings/ScrollContainer/SettingsList/AudioPanel/MarginContainer/VBoxContainer/MusicVolume")
 background_style_option = NodePath("Settings/ScrollContainer/SettingsList/BackgroundPanel/MarginContainer/VBoxContainer/BackgroundStyleOption")
@@ -837,6 +838,42 @@ text = "Vibration"
 [node name="VibrationCheckBox" type="CheckButton" parent="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList/HapticsPanel/MarginContainer/HBoxContainer" unique_id=718909065]
 layout_mode = 2
 button_pressed = true
+
+[node name="OneFingerZoomPanel" type="PanelContainer" parent="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList" unique_id=9100001]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("10_eb6dy")
+
+[node name="MarginContainer" type="MarginContainer" parent="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList/OneFingerZoomPanel" unique_id=9100002]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList/OneFingerZoomPanel/MarginContainer" unique_id=9100003]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList/OneFingerZoomPanel/MarginContainer/VBoxContainer" unique_id=9100004]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList/OneFingerZoomPanel/MarginContainer/VBoxContainer/HBoxContainer" unique_id=9100005]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("3_tefeu")
+theme_override_font_sizes/font_size = 18
+text = "One-finger zoom"
+
+[node name="OneFingerZoomCheckBox" type="CheckButton" parent="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList/OneFingerZoomPanel/MarginContainer/VBoxContainer/HBoxContainer" unique_id=9100006]
+layout_mode = 2
+
+[node name="WarningLabel" type="Label" parent="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList/OneFingerZoomPanel/MarginContainer/VBoxContainer" unique_id=9100007]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+theme_override_fonts/font = ExtResource("3_tefeu")
+theme_override_font_sizes/font_size = 14
+text = "Slows down flag placement and tile reveal."
+autowrap_mode = 2
 
 [node name="BackgroundPanel" type="PanelContainer" parent="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList" unique_id=826455961]
 layout_mode = 2
@@ -1021,6 +1058,7 @@ parameters/looping = true
 [connection signal="value_changed" from="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList/AudioPanel/MarginContainer/VBoxContainer/MasterVolume" to="GUI/SettingsMenu" method="_on_master_volume_changed"]
 [connection signal="value_changed" from="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList/AudioPanel/MarginContainer/VBoxContainer/MusicVolume" to="GUI/SettingsMenu" method="_on_music_volume_changed"]
 [connection signal="toggled" from="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList/HapticsPanel/MarginContainer/HBoxContainer/VibrationCheckBox" to="GUI/SettingsMenu" method="_on_vibration_toggled"]
+[connection signal="toggled" from="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList/OneFingerZoomPanel/MarginContainer/VBoxContainer/HBoxContainer/OneFingerZoomCheckBox" to="GUI/SettingsMenu" method="_on_one_finger_zoom_toggled"]
 [connection signal="item_selected" from="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList/BackgroundPanel/MarginContainer/VBoxContainer/BackgroundStyleOption" to="GUI/SettingsMenu" method="_on_background_style_selected"]
 [connection signal="pressed" from="GUI/SettingsMenu/Settings/BackToMainFromSettings" to="." method="_on_back_to_main_from_settings_pressed"]
 [connection signal="pressed" from="GUI/SettingsMenu/Settings/BackToMainFromSettings" to="." method="_on_button_pressed"]
