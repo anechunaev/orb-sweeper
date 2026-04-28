@@ -191,7 +191,6 @@ texture = ExtResource("4_0ld40")
 expand_mode = 5
 
 [node name="MainMenu" type="MarginContainer" parent="GUI" unique_id=2095990837]
-visible = false
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 16
@@ -737,6 +736,7 @@ expand_mode = 1
 stretch_mode = 4
 
 [node name="SettingsMenu" type="MarginContainer" parent="GUI" unique_id=6146945 node_paths=PackedStringArray("vibration_checkbox", "one_finger_zoom_checkbox", "master_volume_slider", "music_volume_slider", "background_style_option")]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 16
@@ -1029,8 +1029,8 @@ parameters/looping = true
 [connection signal="pressed" from="GUI/MainMenu/MainMenu/Records" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="GUI/MainMenu/MainMenu/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="GUI/MainMenu/MainMenu/Settings" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="GUI/MainMenu/MainMenu/About" to="." method="_on_about_pressed"]
 [connection signal="pressed" from="GUI/MainMenu/MainMenu/About" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="GUI/MainMenu/MainMenu/About" to="." method="_on_about_pressed"]
 [connection signal="pressed" from="GUI/MainMenu/MainMenu/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="toggled" from="GUI/NewGameMenu/NewGame/NoGuessPanel/MarginContainer/HBoxContainer/NoGuessCheckBox" to="GUI/NewGameMenu" method="_on_no_guess_toggled"]
 [connection signal="pressed" from="GUI/NewGameMenu/NewGame/EasyMode" to="." method="_on_button_pressed"]
@@ -1060,8 +1060,8 @@ parameters/looping = true
 [connection signal="toggled" from="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList/HapticsPanel/MarginContainer/HBoxContainer/VibrationCheckBox" to="GUI/SettingsMenu" method="_on_vibration_toggled"]
 [connection signal="toggled" from="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList/OneFingerZoomPanel/MarginContainer/VBoxContainer/HBoxContainer/OneFingerZoomCheckBox" to="GUI/SettingsMenu" method="_on_one_finger_zoom_toggled"]
 [connection signal="item_selected" from="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList/BackgroundPanel/MarginContainer/VBoxContainer/BackgroundStyleOption" to="GUI/SettingsMenu" method="_on_background_style_selected"]
-[connection signal="pressed" from="GUI/SettingsMenu/Settings/BackToMainFromSettings" to="." method="_on_back_to_main_from_settings_pressed"]
 [connection signal="pressed" from="GUI/SettingsMenu/Settings/BackToMainFromSettings" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="GUI/SettingsMenu/Settings/BackToMainFromSettings" to="." method="_on_back_to_main_from_settings_pressed"]
 [connection signal="meta_clicked" from="GUI/AboutMenu/About/PanelContainer/MarginContainer/AboutTabs/Rules/RulesText" to="GUI/AboutMenu" method="_on_meta_clicked"]
 [connection signal="meta_clicked" from="GUI/AboutMenu/About/PanelContainer/MarginContainer/AboutTabs/Info/InfoText" to="GUI/AboutMenu" method="_on_meta_clicked"]
 [connection signal="pressed" from="GUI/AboutMenu/About/BackToMainFromAbout" to="." method="_on_back_to_main_from_about_pressed"]
