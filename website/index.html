@@ -1,0 +1,531 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Orb Sweeper — 3D Minesweeper on a Sphere</title>
+		<meta
+			name="description"
+			content="Orb Sweeper is a 3D minesweeper played on a Goldberg polyhedron — a sphere of hexagons and pentagons. Configurable difficulty, no-guess mode, and a smooth mobile-first experience."
+		/>
+		<meta name="theme-color" content="#1a0d2e" />
+		<meta name="color-scheme" content="dark" />
+		<link rel="icon" type="image/png" href="ic_launcher.png" />
+		<link rel="apple-touch-icon" href="ic_launcher.png" />
+
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="https://orb_sweeper.nechunaev.com/" />
+		<meta
+			property="og:title"
+			content="Orb Sweeper — 3D Minesweeper on a Sphere"
+		/>
+		<meta
+			property="og:description"
+			content="Minesweeper. But on a sphere. Configurable difficulty, no-guess mode, mobile-first."
+		/>
+		<meta
+			property="og:image"
+			content="https://orb_sweeper.nechunaev.com/ic_launcher.png"
+		/>
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta
+			name="twitter:title"
+			content="Orb Sweeper — 3D Minesweeper on a Sphere"
+		/>
+		<meta
+			name="twitter:description"
+			content="Minesweeper. But on a sphere. Configurable difficulty, no-guess mode, mobile-first."
+		/>
+		<meta
+			name="twitter:image"
+			content="https://orb_sweeper.nechunaev.com/ic_launcher.png"
+		/>
+
+		<style>
+			*,
+			*::before,
+			*::after {
+				box-sizing: border-box;
+			}
+
+			html {
+				scroll-behavior: smooth;
+			}
+
+			body {
+				margin: 0;
+				min-height: 100vh;
+				font-family:
+					-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+					"Helvetica Neue", Arial, sans-serif;
+				font-size: 17px;
+				line-height: 1.6;
+				color: #e8e6f0;
+				background:
+					radial-gradient(
+						ellipse 80% 50% at 50% 0%,
+						rgba(255, 74, 74, 0.08),
+						transparent 60%
+					),
+					linear-gradient(
+						180deg,
+						#0c0820 0%,
+						#1a0d2e 50%,
+						#241445 100%
+					);
+				background-attachment: fixed;
+				-webkit-font-smoothing: antialiased;
+			}
+
+			a {
+				color: #b8a8ff;
+				text-decoration: none;
+			}
+			a:hover,
+			a:focus {
+				color: #ff7a7a;
+				text-decoration: underline;
+			}
+
+			h1,
+			h2,
+			h3 {
+				font-weight: 700;
+				line-height: 1.2;
+				margin: 0 0 0.6em;
+			}
+			h1 {
+				font-size: clamp(2.4rem, 6vw, 3.6rem);
+				letter-spacing: -0.02em;
+			}
+			h2 {
+				font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+				letter-spacing: -0.01em;
+			}
+			h3 {
+				font-size: 1.15rem;
+				color: #f4f1ff;
+			}
+
+			p {
+				margin: 0 0 1em;
+			}
+			ul {
+				margin: 0 0 1em;
+				padding-left: 1.2em;
+			}
+			li {
+				margin-bottom: 0.4em;
+			}
+
+			.muted {
+				color: #9a96b5;
+			}
+
+			.container {
+				max-width: 960px;
+				margin: 0 auto;
+				padding: 0 24px;
+			}
+
+			section {
+				padding: 64px 0;
+			}
+			section + section {
+				border-top: 1px solid rgba(255, 255, 255, 0.06);
+			}
+
+			/* Hero */
+			.hero {
+				text-align: center;
+				padding: 80px 0 64px;
+			}
+			.hero__logo-wrap {
+				position: relative;
+				display: inline-block;
+				margin-bottom: 24px;
+			}
+			.hero__logo-wrap::before {
+				content: "";
+				position: absolute;
+				inset: -20%;
+				background: radial-gradient(
+					circle,
+					rgba(255, 74, 74, 0.18),
+					transparent 60%
+				);
+				filter: blur(20px);
+				z-index: -1;
+			}
+			.hero__logo {
+				width: clamp(180px, 32vw, 260px);
+				height: auto;
+				display: block;
+			}
+			.hero__logo_title {
+				width: clamp(280px, 32vw, 360px);
+				height: auto;
+				margin-top: -70px;
+			}
+			.hero__tagline {
+				font-size: clamp(1.05rem, 2.2vw, 1.25rem);
+				color: #c9c4e0;
+				margin: 0 0 32px;
+			}
+			.hero__cta {
+				display: inline-block;
+			}
+			.hero__cta img {
+				height: 64px;
+				width: auto;
+				display: block;
+			}
+
+			/* Features */
+			.features-grid {
+				display: grid;
+				grid-template-columns: 1fr;
+				gap: 16px;
+				margin-top: 24px;
+			}
+			.feature {
+				padding: 20px 22px;
+				background: rgba(255, 255, 255, 0.03);
+				border: 1px solid rgba(255, 255, 255, 0.07);
+				border-radius: 16px;
+			}
+			.feature h3 {
+				margin-bottom: 6px;
+			}
+			.feature p {
+				margin: 0;
+				color: #c9c4e0;
+				font-size: 0.95rem;
+			}
+
+			/* Rules */
+			.rules h3 {
+				margin-top: 1.5em;
+			}
+			.rules h3:first-child {
+				margin-top: 0;
+			}
+
+			/* Screenshots */
+			.shots-grid {
+				display: grid;
+				grid-template-columns: repeat(2, 1fr);
+				gap: 16px;
+				margin-top: 24px;
+			}
+			.shot {
+				aspect-ratio: 9 / 19.5;
+				background: rgba(255, 255, 255, 0.04);
+				border: 1px solid rgba(255, 255, 255, 0.07);
+				border-radius: 16px;
+				overflow: hidden;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				color: #6b6685;
+				font-size: 0.85rem;
+			}
+			.shot img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				display: block;
+			}
+
+			/* About */
+			.about p {
+				color: #c9c4e0;
+			}
+
+			/* Footer */
+			footer {
+				padding: 32px 0 48px;
+				text-align: center;
+				color: #6b6685;
+				font-size: 0.9rem;
+				border-top: 1px solid rgba(255, 255, 255, 0.06);
+			}
+			footer a {
+				color: #9a96b5;
+			}
+			footer .footer-links {
+				margin-bottom: 8px;
+			}
+			footer .footer-links a + a {
+				margin-left: 16px;
+			}
+
+			@media (min-width: 720px) {
+				.features-grid {
+					grid-template-columns: repeat(2, 1fr);
+				}
+				.shots-grid {
+					grid-template-columns: repeat(4, 1fr);
+					gap: 12px;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<header class="hero">
+			<div class="container">
+				<div class="hero__logo-wrap">
+					<img
+						class="hero__logo"
+						src="ic_launcher_foreground.png"
+						alt="Orb Sweeper logo"
+					/>
+				</div>
+				<h1>
+					<img
+						src="orb_sweeper_logo_shadow.png"
+						alt="Orb Sweeper"
+						class="hero__logo_title"
+					/>
+				</h1>
+				<p class="hero__tagline">Minesweeper. But on a sphere.</p>
+				<a
+					class="hero__cta"
+					href="https://play.google.com/store/apps/details?id=com.nechunaev.orb_sweeper"
+					target="_blank"
+					rel="noopener"
+				>
+					<img
+						src="en_badge_web_generic.png"
+						alt="Get it on Google Play"
+					/>
+				</a>
+			</div>
+		</header>
+
+		<section id="features">
+			<div class="container">
+				<h2>Features</h2>
+				<div class="features-grid">
+					<div class="feature">
+						<h3>Goldberg polyhedron board</h3>
+						<p>
+							A sphere tiled with hexagons and exactly twelve
+							pentagons. Reveal cells in 3D, no flat grids.
+						</p>
+					</div>
+					<div class="feature">
+						<h3>Configurable difficulty</h3>
+						<p>
+							Pick a preset (Easy, Normal, Hard) or build a custom
+							game with subdivision 1–10 and mine density 5–50%.
+						</p>
+					</div>
+					<div class="feature">
+						<h3>No-guess mode</h3>
+						<p>
+							Generates puzzles that are guaranteed solvable by
+							pure logic — no luck required.
+						</p>
+					</div>
+					<div class="feature">
+						<h3>Mobile-first</h3>
+						<p>
+							Portrait UI, smooth orbit camera, pinch or
+							one-finger zoom, and haptic feedback.
+						</p>
+					</div>
+					<div class="feature">
+						<h3>High scores</h3>
+						<p>
+							Per-difficulty records saved on device, ready for
+							leaderboard sync.
+						</p>
+					</div>
+					<div class="feature">
+						<h3>Free &amp; open source</h3>
+						<p>
+							Built with Godot. Source code released under the MIT
+							license.
+						</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section id="how-to-play" class="rules">
+			<div class="container">
+				<h2>How to play</h2>
+
+				<h3>Goal</h3>
+				<p>
+					Reveal all safe cells on the sphere without hitting a mine.
+				</p>
+
+				<h3>Controls</h3>
+				<ul>
+					<li>Tap a cell to reveal it.</li>
+					<li>Long-press a cell to place or remove a flag.</li>
+					<li>
+						Tap a revealed number to chord — reveal all unflagged
+						neighbors when the correct number of flags is placed
+						around it.
+					</li>
+					<li>Drag to rotate the sphere. Pinch or scroll to zoom.</li>
+				</ul>
+
+				<h3>How numbers work</h3>
+				<p>
+					Each revealed cell shows how many of its neighbors are
+					mines. Hexagons have 6 neighbors, pentagons have 5.
+				</p>
+
+				<h3>Winning &amp; losing</h3>
+				<p>
+					You win when every non-mine cell is revealed. You lose if
+					you reveal a mine.
+				</p>
+
+				<h3>No-guess mode</h3>
+				<p>
+					When enabled, the generated puzzle is guaranteed to be
+					solvable through logic alone — no guessing required.
+				</p>
+			</div>
+		</section>
+
+		<section id="screenshots">
+			<div class="container">
+				<h2>Screenshots</h2>
+				<div class="shots-grid">
+					<div class="shot">
+						<img
+							src="screenshot_1.png"
+							alt="Orb Sweeper screenshot 1"
+							loading="lazy"
+							onerror="
+								this.replaceWith(
+									Object.assign(
+										document.createElement('span'),
+										{ textContent: 'Screenshot 1' },
+									),
+								)
+							"
+						/>
+					</div>
+					<div class="shot">
+						<img
+							src="screenshot_2.png"
+							alt="Orb Sweeper screenshot 2"
+							loading="lazy"
+							onerror="
+								this.replaceWith(
+									Object.assign(
+										document.createElement('span'),
+										{ textContent: 'Screenshot 2' },
+									),
+								)
+							"
+						/>
+					</div>
+					<div class="shot">
+						<img
+							src="screenshot_3.png"
+							alt="Orb Sweeper screenshot 3"
+							loading="lazy"
+							onerror="
+								this.replaceWith(
+									Object.assign(
+										document.createElement('span'),
+										{ textContent: 'Screenshot 3' },
+									),
+								)
+							"
+						/>
+					</div>
+					<div class="shot">
+						<img
+							src="screenshot_4.png"
+							alt="Orb Sweeper screenshot 4"
+							loading="lazy"
+							onerror="
+								this.replaceWith(
+									Object.assign(
+										document.createElement('span'),
+										{ textContent: 'Screenshot 4' },
+									),
+								)
+							"
+						/>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section id="about" class="about">
+			<div class="container">
+				<h2>About</h2>
+				<p>
+					Made by
+					<a href="mailto:artem@nechunaev.com">Artem Nechunaev</a>.
+				</p>
+				<p>
+					Source code:
+					<a
+						href="https://github.com/anechunaev/orb-sweeper"
+						target="_blank"
+						rel="noopener"
+						>github.com/anechunaev/orb-sweeper</a
+					>
+					— released under the MIT license.
+				</p>
+				<p>
+					All sound effects and music by
+					<a
+						href="https://www.zapsplat.com/"
+						target="_blank"
+						rel="noopener"
+						>ZapSplat</a
+					>
+					(<a
+						href="https://www.zapsplat.com/license-type/standard-license/"
+						target="_blank"
+						rel="noopener"
+						>license</a
+					>).
+				</p>
+				<p>
+					Questions or feedback? Email
+					<a href="mailto:artem@nechunaev.com">artem@nechunaev.com</a
+					>.
+				</p>
+			</div>
+		</section>
+
+		<footer>
+			<div class="container">
+				<div class="footer-links">
+					<a
+						href="https://github.com/anechunaev/orb-sweeper/blob/main/PRIVACY_POLICY.md"
+						target="_blank"
+						rel="noopener"
+						>Privacy Policy</a
+					>
+					<a
+						href="https://github.com/anechunaev/orb-sweeper"
+						target="_blank"
+						rel="noopener"
+						>Source</a
+					>
+					<a href="mailto:artem@nechunaev.com">Contact</a>
+				</div>
+				<div>&copy; <span id="year">2026</span> Artem Nechunaev</div>
+			</div>
+		</footer>
+
+		<script>
+			document.getElementById("year").textContent =
+				new Date().getFullYear();
+		</script>
+	</body>
+</html>
