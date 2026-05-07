@@ -1,0 +1,35 @@
+name: Deploy website
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'website/**'
+      - 'PRIVACY_POLICY.md'
+      - '.github/workflows/deploy-website.yml'
+      - '.github/privacy-policy-style.html'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Convert PRIVACY_POLICY.md to HTML
+        run: |
+          pandoc PRIVACY_POLICY.md \
+            --from gfm \
+            --to html5 \
+            --standalone \
+            --metadata title="Orb Sweeper — Privacy Policy" \
+            --metadata lang=en \
+            --include-in-header=.github/privacy-policy-style.html \
+            --output website/privacy-policy.html
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy ./website --project-name=orb-sweeper-site --branch=main
