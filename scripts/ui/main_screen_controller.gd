@@ -78,3 +78,7 @@ func _on_exit_button_pressed() -> void:
 
 func _on_button_pressed() -> void:
 	click_sound.play()
+
+
+func _on_rate_button_pressed() -> void:
+	RatePromptManager.mark_rated()

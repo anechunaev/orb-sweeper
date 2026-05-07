@@ -20,11 +20,20 @@ signal exit_requested
 @export var ui_exit_button: Button
 @export var menu_delay_timer: Timer
 
+@export_group("Rate Prompt UI")
+@export var ui_rate_prompt: Control
+@export var ui_rate_later_button: Button
+@export var ui_rate_now_button: Button
+@export var rate_prompt_delay_timer: Timer
+
 
 func _ready() -> void:
 	menu_delay_timer.timeout.connect(_show_menu_endgame)
 	game.game_won.connect(_on_game_ended)
 	game.game_lost.connect(_on_game_ended)
+	rate_prompt_delay_timer.timeout.connect(_maybe_show_rate_prompt)
+	ui_rate_later_button.pressed.connect(_on_rate_later_pressed)
+	ui_rate_now_button.pressed.connect(_on_rate_now_pressed)
 
 
 func _on_game_ended() -> void:
@@ -57,6 +66,8 @@ func toggle_menu(show_menu: bool = false) -> void:
 		ui_menu_difficulty_params.text = "d=" + str(int(game.mine_ratio * 100)) + "% s=" + str(game.subdivision)
 	camera.toggle_input_handling(!show_menu)
 	ui_menu.visible = show_menu
+	if not show_menu:
+		_hide_rate_prompt()
 
 
 ## Returns true when the menu overlay is currently on-screen.
@@ -66,6 +77,31 @@ func is_menu_visible() -> bool:
 
 func _show_menu_endgame() -> void:
 	toggle_menu(true)
+	if game.phase == SphericalMinesweeper.GamePhase.WON and RatePromptManager.should_prompt():
+		rate_prompt_delay_timer.start()
+
+
+func _maybe_show_rate_prompt() -> void:
+	if not ui_menu.visible:
+		return
+	if not RatePromptManager.should_prompt():
+		return
+	ui_rate_prompt.visible = true
+
+
+func _hide_rate_prompt() -> void:
+	rate_prompt_delay_timer.stop()
+	ui_rate_prompt.visible = false
+
+
+func _on_rate_later_pressed() -> void:
+	RatePromptManager.postpone()
+	_hide_rate_prompt()
+
+
+func _on_rate_now_pressed() -> void:
+	RatePromptManager.mark_rated()
+	_hide_rate_prompt()
 
 
 func _on_new_game_button_pressed() -> void:

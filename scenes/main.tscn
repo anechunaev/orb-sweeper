@@ -60,6 +60,18 @@ dof_blur_near_distance = 2.75
 
 [sub_resource type="Compositor" id="Compositor_tbgi4"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jscy8"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(0.039215688, 0.16862746, 0.101960786, 0.8784314)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 5
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0ld40"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jbj1t"]
@@ -237,6 +249,16 @@ theme_override_styles/normal = ExtResource("4_o6xl0")
 theme_override_styles/pressed = ExtResource("5_tipki")
 theme_override_styles/hover = ExtResource("6_85g3d")
 text = "About"
+
+[node name="RateButton" type="Button" parent="GUI/MainMenu/MainMenu" unique_id=114581112]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("3_tefeu")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_jscy8")
+theme_override_styles/pressed = ExtResource("5_tipki")
+theme_override_styles/hover = ExtResource("6_85g3d")
+text = "Leave a Review"
 
 [node name="HSeparator" type="HSeparator" parent="GUI/MainMenu/MainMenu" unique_id=864753846]
 layout_mode = 2
@@ -1023,14 +1045,15 @@ autoplay = true
 bus = &"Music"
 parameters/looping = true
 
-[connection signal="pressed" from="GUI/MainMenu/MainMenu/NewGame" to="." method="_on_new_game_pressed"]
 [connection signal="pressed" from="GUI/MainMenu/MainMenu/NewGame" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="GUI/MainMenu/MainMenu/NewGame" to="." method="_on_new_game_pressed"]
 [connection signal="pressed" from="GUI/MainMenu/MainMenu/Records" to="." method="_on_records_pressed"]
 [connection signal="pressed" from="GUI/MainMenu/MainMenu/Records" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="GUI/MainMenu/MainMenu/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="GUI/MainMenu/MainMenu/Settings" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="GUI/MainMenu/MainMenu/About" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="GUI/MainMenu/MainMenu/About" to="." method="_on_about_pressed"]
+[connection signal="pressed" from="GUI/MainMenu/MainMenu/RateButton" to="." method="_on_rate_button_pressed"]
 [connection signal="pressed" from="GUI/MainMenu/MainMenu/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="toggled" from="GUI/NewGameMenu/NewGame/NoGuessPanel/MarginContainer/HBoxContainer/NoGuessCheckBox" to="GUI/NewGameMenu" method="_on_no_guess_toggled"]
 [connection signal="pressed" from="GUI/NewGameMenu/NewGame/EasyMode" to="." method="_on_button_pressed"]
@@ -1053,16 +1076,16 @@ parameters/looping = true
 [connection signal="visibility_changed" from="GUI/RecordsScreen" to="GUI/RecordsScreen" method="_on_visibility_changed"]
 [connection signal="pressed" from="GUI/RecordsScreen/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Custom/VBoxContainer/HBoxContainer/VBoxContainer/SortingField" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="GUI/RecordsScreen/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Custom/VBoxContainer/HBoxContainer/VBoxContainer2/SortingOrder" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="GUI/RecordsScreen/VBoxContainer/BackToMainScreenFromRecords" to="." method="_on_back_to_main_screen_from_records_pressed"]
 [connection signal="pressed" from="GUI/RecordsScreen/VBoxContainer/BackToMainScreenFromRecords" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="GUI/RecordsScreen/VBoxContainer/BackToMainScreenFromRecords" to="." method="_on_back_to_main_screen_from_records_pressed"]
 [connection signal="value_changed" from="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList/AudioPanel/MarginContainer/VBoxContainer/MasterVolume" to="GUI/SettingsMenu" method="_on_master_volume_changed"]
 [connection signal="value_changed" from="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList/AudioPanel/MarginContainer/VBoxContainer/MusicVolume" to="GUI/SettingsMenu" method="_on_music_volume_changed"]
 [connection signal="toggled" from="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList/HapticsPanel/MarginContainer/HBoxContainer/VibrationCheckBox" to="GUI/SettingsMenu" method="_on_vibration_toggled"]
 [connection signal="toggled" from="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList/OneFingerZoomPanel/MarginContainer/VBoxContainer/HBoxContainer/OneFingerZoomCheckBox" to="GUI/SettingsMenu" method="_on_one_finger_zoom_toggled"]
 [connection signal="item_selected" from="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList/BackgroundPanel/MarginContainer/VBoxContainer/BackgroundStyleOption" to="GUI/SettingsMenu" method="_on_background_style_selected"]
-[connection signal="pressed" from="GUI/SettingsMenu/Settings/BackToMainFromSettings" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="GUI/SettingsMenu/Settings/BackToMainFromSettings" to="." method="_on_back_to_main_from_settings_pressed"]
+[connection signal="pressed" from="GUI/SettingsMenu/Settings/BackToMainFromSettings" to="." method="_on_button_pressed"]
 [connection signal="meta_clicked" from="GUI/AboutMenu/About/PanelContainer/MarginContainer/AboutTabs/Rules/RulesText" to="GUI/AboutMenu" method="_on_meta_clicked"]
 [connection signal="meta_clicked" from="GUI/AboutMenu/About/PanelContainer/MarginContainer/AboutTabs/Info/InfoText" to="GUI/AboutMenu" method="_on_meta_clicked"]
-[connection signal="pressed" from="GUI/AboutMenu/About/BackToMainFromAbout" to="." method="_on_back_to_main_from_about_pressed"]
 [connection signal="pressed" from="GUI/AboutMenu/About/BackToMainFromAbout" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="GUI/AboutMenu/About/BackToMainFromAbout" to="." method="_on_back_to_main_from_about_pressed"]

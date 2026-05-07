@@ -35,6 +35,7 @@ BackgroundManager="*res://scripts/autoload/background_manager.gd"
 GameConfig="*res://scripts/autoload/game_config.gd"
 RecordsManager="*uid://moliofp5hxb6"
 InputManager="*res://scripts/autoload/input_manager.gd"
+RatePromptManager="*res://scripts/autoload/rate_prompt_manager.gd"
 
 [display]
 
