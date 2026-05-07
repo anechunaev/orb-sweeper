@@ -58,3 +58,6 @@ Presets: Easy (s=3, 15%), Normal (s=5, 20%), Hard (s=7, 25%)
 - Jolt Physics for 3D raycasting (face selection via dot product to face centers)
 - Sphere radius scales with subdivision: `radius = subdivision * 2.0`
 - Face adjacency stored as flat arrays for efficient BFS traversal
+
+## Privacy Policy
+The canonical privacy policy lives at `PRIVACY_POLICY.md`. The website copy at `website/privacy-policy.html` is generated automatically by `.github/workflows/deploy-website.yml` (pandoc) on push to `main` — do not edit it by hand.
