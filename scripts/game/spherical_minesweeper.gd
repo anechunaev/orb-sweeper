@@ -439,6 +439,7 @@ func _check_win() -> void:
 		_manager.flush()
 		sound_won.play()
 		RecordsManager.update_record(subdivision, mine_ratio, _final_time_usec, no_guess)
+		LeaderboardsManager.submit_score(subdivision, mine_ratio, no_guess, _final_time_usec)
 		RatePromptManager.record_win()
 		_emit_stats()
 		game_won.emit()

@@ -132,6 +132,8 @@ corner_detail = 5
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yc10j"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vxglm"]
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jscy8"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pm3ni"]
@@ -605,7 +607,7 @@ offset_bottom = 40.0
 texture = ExtResource("9_85g3d")
 expand_mode = 4
 
-[node name="RecordsScreen" type="MarginContainer" parent="GUI" unique_id=1704869092 node_paths=PackedStringArray("classic_container", "no_guess_container", "custom_list", "sort_by_option", "sort_dir_option")]
+[node name="RecordsScreen" type="MarginContainer" parent="GUI" unique_id=1704869092 node_paths=PackedStringArray("classic_container", "no_guess_container", "custom_list", "sort_by_option", "sort_dir_option", "view_leaderboards_button")]
 visible = false
 layout_mode = 2
 size_flags_vertical = 3
@@ -619,6 +621,7 @@ no_guess_container = NodePath("VBoxContainer/PanelContainer/MarginContainer/VBox
 custom_list = NodePath("VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Custom/VBoxContainer/ScrollContainer/CustomContainer")
 sort_by_option = NodePath("VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Custom/VBoxContainer/HBoxContainer/VBoxContainer/SortingField")
 sort_dir_option = NodePath("VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Custom/VBoxContainer/HBoxContainer/VBoxContainer2/SortingOrder")
+view_leaderboards_button = NodePath("VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/ViewLeaderboardsButton")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="GUI/RecordsScreen" unique_id=2041771005]
 layout_mode = 2
@@ -638,11 +641,29 @@ theme_override_constants/margin_bottom = 16
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="Label" type="Label" parent="GUI/RecordsScreen/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1351437621]
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/RecordsScreen/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1114675996]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="GUI/RecordsScreen/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1351437621]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_tefeu")
 theme_override_font_sizes/font_size = 18
 text = "Records"
+
+[node name="VSeparator" type="VSeparator" parent="GUI/RecordsScreen/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=958894113]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_vxglm")
+
+[node name="ViewLeaderboardsButton" type="Button" parent="GUI/RecordsScreen/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1351437622]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_tefeu")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = ExtResource("4_o6xl0")
+theme_override_styles/pressed = ExtResource("5_tipki")
+theme_override_styles/hover = ExtResource("6_85g3d")
+text = "View leaderboards"
 
 [node name="TabContainer" type="TabContainer" parent="GUI/RecordsScreen/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=927838445]
 layout_mode = 2
@@ -1051,8 +1072,8 @@ parameters/looping = true
 [connection signal="pressed" from="GUI/MainMenu/MainMenu/Records" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="GUI/MainMenu/MainMenu/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="GUI/MainMenu/MainMenu/Settings" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="GUI/MainMenu/MainMenu/About" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="GUI/MainMenu/MainMenu/About" to="." method="_on_about_pressed"]
+[connection signal="pressed" from="GUI/MainMenu/MainMenu/About" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="GUI/MainMenu/MainMenu/RateButton" to="." method="_on_rate_button_pressed"]
 [connection signal="pressed" from="GUI/MainMenu/MainMenu/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="toggled" from="GUI/NewGameMenu/NewGame/NoGuessPanel/MarginContainer/HBoxContainer/NoGuessCheckBox" to="GUI/NewGameMenu" method="_on_no_guess_toggled"]
@@ -1087,5 +1108,5 @@ parameters/looping = true
 [connection signal="pressed" from="GUI/SettingsMenu/Settings/BackToMainFromSettings" to="." method="_on_button_pressed"]
 [connection signal="meta_clicked" from="GUI/AboutMenu/About/PanelContainer/MarginContainer/AboutTabs/Rules/RulesText" to="GUI/AboutMenu" method="_on_meta_clicked"]
 [connection signal="meta_clicked" from="GUI/AboutMenu/About/PanelContainer/MarginContainer/AboutTabs/Info/InfoText" to="GUI/AboutMenu" method="_on_meta_clicked"]
-[connection signal="pressed" from="GUI/AboutMenu/About/BackToMainFromAbout" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="GUI/AboutMenu/About/BackToMainFromAbout" to="." method="_on_back_to_main_from_about_pressed"]
+[connection signal="pressed" from="GUI/AboutMenu/About/BackToMainFromAbout" to="." method="_on_button_pressed"]

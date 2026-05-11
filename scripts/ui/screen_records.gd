@@ -22,6 +22,7 @@ const CLASSIC_DIFFICULTIES := DifficultyPresets.CLASSIC
 @export var custom_list: VBoxContainer
 @export var sort_by_option: OptionButton
 @export var sort_dir_option: OptionButton
+@export var view_leaderboards_button: Button
 
 @onready var _record_card_scene: PackedScene = preload("res://nodes/record_card.tscn")
 
@@ -34,7 +35,30 @@ var _current_sort_dir: SortDir = SortDir.ASCENDING
 
 func _ready() -> void:
 	_setup_sort_controls()
+	if view_leaderboards_button:
+		view_leaderboards_button.visible = OS.has_feature("mobile")
+		if OS.has_feature("mobile"):
+			LeaderboardsManager.state_changed.connect(_refresh_leaderboards_button)
+			_refresh_leaderboards_button()
 	refresh()
+
+
+func _refresh_leaderboards_button() -> void:
+	if view_leaderboards_button == null:
+		return
+	for c in view_leaderboards_button.pressed.get_connections():
+		view_leaderboards_button.pressed.disconnect(c.callable)
+	if not LeaderboardsManager.is_ready_for_use():
+		view_leaderboards_button.text = "Leaderboards unavailable"
+		view_leaderboards_button.disabled = true
+		return
+	view_leaderboards_button.disabled = false
+	if LeaderboardsManager.is_authenticated:
+		view_leaderboards_button.text = "View leaderboards"
+		view_leaderboards_button.pressed.connect(LeaderboardsManager.show_all_leaderboards)
+	else:
+		view_leaderboards_button.text = "Sign in to Play Games"
+		view_leaderboards_button.pressed.connect(LeaderboardsManager.request_sign_in)
 
 
 func _on_visibility_changed() -> void:
