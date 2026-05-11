@@ -1,10 +1,10 @@
 # Privacy Policy
 
-_Last updated: 2026-05-07_
+_Last updated: 2026-05-11_
 
 ## Overview
 
-Orb Sweeper is a single-player game. It is designed with privacy in mind and operates entirely on your device.
+Orb Sweeper is a single-player game designed with privacy in mind. It operates entirely on your device by default; the only data that ever leaves your device is leaderboard information shared with Google Play Games Services, and only if you choose to sign in (see "Third-Party Services" below).
 
 ## Data Collection
 
@@ -30,9 +30,8 @@ Orb Sweeper integrates Google Play Games Services (GPGS) for online leaderboards
 
 When you sign in, the following data is shared between your device and Google:
 
-- Your Google account identifier and Play Games gamer ID / public profile (display name, avatar).
-- Sign-in events (timestamps).
-- Your best completion times for the six preset difficulties (Easy / Normal / Hard, Classic and No-Guess).
+- Your Google Play Games player ID and public profile (display name, avatar).
+- Your completion time for each winning run on a preset difficulty (Easy / Normal / Hard, Classic and No-Guess — six leaderboards total). Google's leaderboard service retains the best time per leaderboard.
 
 This data is processed and stored by Google under Google's privacy policy: https://policies.google.com/privacy
 
@@ -44,9 +43,12 @@ Custom-difficulty records are never submitted to Google and remain on your devic
 - If signed in, sign out from inside the Google Play Games app on your device.
 - Uninstalling the game removes all local data. Data already submitted to Google can be deleted from your Play Games account at https://myaccount.google.com → Data & Privacy.
 
-## Network Access
+## Android Permissions
 
-Orb Sweeper requests the INTERNET and ACCESS_NETWORK_STATE Android permissions solely to communicate with Google Play Games Services. No other network calls are made.
+Orb Sweeper requests two Android permissions:
+
+- **INTERNET** — used solely to communicate with Google Play Games Services when you choose to sign in. No other network calls are made.
+- **VIBRATE** — used for haptic feedback during gameplay. Can be disabled in the in-game settings.
 
 ## Local Storage
 
@@ -55,7 +57,7 @@ The game stores the following information locally on your device:
 - Game settings (audio, haptics, background, difficulty preferences).
 - High scores and best times.
 
-If you sign in to Google Play Games, the same best-time records for the six preset difficulties are also submitted to Google's servers; see Third-Party Services. Otherwise this data never leaves your device.
+If you sign in to Google Play Games, completion times for the six preset difficulties are also submitted to Google's servers; see Third-Party Services. Otherwise this data never leaves your device.
 
 You can remove local data at any time by uninstalling the app or clearing its storage through your device settings.
 
