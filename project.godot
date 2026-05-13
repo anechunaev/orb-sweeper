@@ -38,6 +38,7 @@ LeaderboardIds="*res://scripts/autoload/leaderboard_ids.gd"
 LeaderboardsManager="*res://scripts/autoload/leaderboards_manager.gd"
 InputManager="*res://scripts/autoload/input_manager.gd"
 RatePromptManager="*res://scripts/autoload/rate_prompt_manager.gd"
+SafeAreaManager="*res://scripts/autoload/safe_area_manager.gd"
 GodotPlayGameServices="*uid://dcon6tmv1dsiq"
 
 [display]

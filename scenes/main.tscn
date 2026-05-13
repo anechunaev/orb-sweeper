@@ -22,6 +22,7 @@
 [ext_resource type="AudioStream" uid="uid://bu2tesdp6xgv2" path="res://sounds/music_zapsplat_among_the_stars.mp3" id="18_dp3eg"]
 [ext_resource type="Script" uid="uid://2n8ogibstjul" path="res://scripts/ui/screen_settings.gd" id="20_sttng"]
 [ext_resource type="Script" uid="uid://b683nup63bmt1" path="res://scripts/ui/screen_about.gd" id="21_about"]
+[ext_resource type="Script" uid="uid://b4apfp23wetq5" path="res://scripts/ui/safe_area_padding.gd" id="22_safe"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_0wfyh"]
 panorama = ExtResource("1_o5qli")
@@ -188,7 +189,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_vertical = 3
 theme_override_constants/separation = 0
+
+[node name="SafeArea" type="Node" parent="GUI" unique_id=1665341443]
+script = ExtResource("22_safe")
 
 [node name="Logo" type="MarginContainer" parent="GUI" unique_id=1803117105]
 layout_mode = 2
@@ -628,6 +633,8 @@ layout_mode = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="GUI/RecordsScreen/VBoxContainer" unique_id=1460448982]
 layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 20.0
 theme_override_styles/panel = ExtResource("10_eb6dy")
 
 [node name="MarginContainer" type="MarginContainer" parent="GUI/RecordsScreen/VBoxContainer/PanelContainer" unique_id=338216594]
@@ -667,6 +674,7 @@ text = "View leaderboards"
 
 [node name="TabContainer" type="TabContainer" parent="GUI/RecordsScreen/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=927838445]
 layout_mode = 2
+size_flags_vertical = 3
 theme_override_constants/side_margin = 10
 theme_override_constants/tab_separation = 0
 theme_override_fonts/font = ExtResource("11_trceg")
@@ -744,7 +752,6 @@ text = "Sorting Order"
 layout_mode = 2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="GUI/RecordsScreen/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Custom/VBoxContainer" unique_id=131208298]
-custom_minimum_size = Vector2(0, 250)
 layout_mode = 2
 size_flags_vertical = 3
 
