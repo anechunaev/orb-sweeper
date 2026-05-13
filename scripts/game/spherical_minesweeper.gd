@@ -360,10 +360,50 @@ func _try_chord(fi: int) -> void:
 			_reveal_cell(ni)
 
 
+## Auto-flag chord: if a revealed cell's (flagged + unrevealed-unflagged)
+## neighbour count matches its mine-count, flag all remaining unrevealed
+## neighbours.
+func _try_auto_flag(fi: int) -> void:
+	if _neighbor_count[fi] == 0:
+		sound_stop.play()
+		return
+
+	var flag_count := 0
+	var to_flag: Array[int] = []
+	var neighbours: Array = _result.adjacency[fi]
+	for ni: int in neighbours:
+		if _flagged[ni] == 1:
+			flag_count += 1
+		elif _revealed[ni] == 0:
+			to_flag.append(ni)
+
+	if to_flag.is_empty():
+		sound_stop.play()
+		return
+	if flag_count + to_flag.size() != _neighbor_count[fi]:
+		sound_stop.play()
+		return
+
+	sound_flag.play()
+	for ni: int in to_flag:
+		_flagged[ni] = 1
+		_flagged_count += 1
+		_manager.flag_cell(ni)
+		if _flag_renderer:
+			_flag_renderer.add_flag(ni, _result.face_centers[ni],
+				_result.face_centers[ni].normalized())
+
+	_manager.flush()
+	_emit_stats()
+	if _is_touch_device():
+		HapticsManager.vibrate(50)
+
+
 func _on_flag(fi: int) -> void:
 	if phase != GamePhase.PLAYING and phase != GamePhase.WAITING_FIRST:
 		return
 	if _revealed[fi] == 1:
+		_try_auto_flag(fi)
 		return
 
 	if _flagged[fi] == 0:

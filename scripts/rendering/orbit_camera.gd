@@ -262,7 +262,8 @@ func _handle_single_drag(pos: Vector2, relative: Vector2) -> void:
 
 	if _zoom_gesture_armed or _zoom_gesture_active:
 		_zoom_gesture_active = true
-		_velocity_zoom += relative.y * single_finger_zoom_sensitivity
+		var dir: float = -1.0 if InputManager.reverse_zoom_direction else 1.0
+		_velocity_zoom += relative.y * single_finger_zoom_sensitivity * dir
 		return
 
 	if not _drag_confirmed:
@@ -293,8 +294,9 @@ func _current_pinch_distance() -> float:
 func _orbit_by_pixels(rel: Vector2) -> void:
 	# Rotate around camera-local axes only — no world-space axis dependency
 	# means no pole restrictions or drift at the poles.
-	var angle_h := -rel.x * orbit_sensitivity
-	var angle_v := -rel.y * orbit_sensitivity
+	var sens: float = orbit_sensitivity * InputManager.rotation_sensitivity
+	var angle_h := -rel.x * sens
+	var angle_v := -rel.y * sens
 
 	var cam_right := (_orientation * Vector3.RIGHT).normalized()
 	var cam_up := (_orientation * Vector3.UP).normalized()
