@@ -35,6 +35,7 @@
 [ext_resource type="Script" uid="uid://petx80oceqpb" path="res://scripts/game/game_menu_controller.gd" id="30_menu"]
 [ext_resource type="Script" uid="uid://cw0soi7hjx6og" path="res://scripts/ui/no_guess_hud.gd" id="31_nghud"]
 [ext_resource type="Script" uid="uid://b4apfp23wetq5" path="res://scripts/ui/safe_area_padding.gd" id="32_safe"]
+[ext_resource type="Script" uid="uid://d3sbm8uqgwimy" path="res://scripts/ui/tap_only_button.gd" id="33_tapbtn"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ajshl"]
 panorama = ExtResource("9_suyxu")
@@ -495,6 +496,7 @@ theme_override_styles/hover_pressed = ExtResource("17_02fa5")
 text = "Menu"
 icon = ExtResource("19_7025r")
 alignment = 0
+script = ExtResource("33_tapbtn")
 
 [node name="NewGameButton" type="Button" parent="BottomContainer/HBoxContainer" unique_id=116161871]
 layout_mode = 2
@@ -511,6 +513,7 @@ text = "New Game"
 icon = ExtResource("12_wljb1")
 alignment = 2
 icon_alignment = 2
+script = ExtResource("33_tapbtn")
 
 [node name="Menu" type="MarginContainer" parent="." unique_id=1417759874]
 visible = false
@@ -829,10 +832,10 @@ ui_rate_later_button = NodePath("../RatePrompt/Dialog/MarginContainer/VBoxContai
 ui_rate_now_button = NodePath("../RatePrompt/Dialog/MarginContainer/VBoxContainer/Buttons/RateButton")
 rate_prompt_delay_timer = NodePath("../UIRatePromptDelay")
 
-[connection signal="pressed" from="BottomContainer/HBoxContainer/MenuButton" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="BottomContainer/HBoxContainer/MenuButton" to="GameMenuController" method="_on_menu_button_pressed"]
-[connection signal="pressed" from="BottomContainer/HBoxContainer/NewGameButton" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="BottomContainer/HBoxContainer/NewGameButton" to="GameMenuController" method="_on_new_game_button_pressed"]
+[connection signal="tapped" from="BottomContainer/HBoxContainer/MenuButton" to="." method="_on_button_pressed"]
+[connection signal="tapped" from="BottomContainer/HBoxContainer/MenuButton" to="GameMenuController" method="_on_menu_button_pressed"]
+[connection signal="tapped" from="BottomContainer/HBoxContainer/NewGameButton" to="." method="_on_button_pressed"]
+[connection signal="tapped" from="BottomContainer/HBoxContainer/NewGameButton" to="GameMenuController" method="_on_new_game_button_pressed"]
 [connection signal="pressed" from="Menu/MarginContainer/Menu/HBoxContainer4/ExitButton" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Menu/MarginContainer/Menu/HBoxContainer4/ExitButton" to="GameMenuController" method="_on_exit_to_main_menu_pressed"]
 [connection signal="pressed" from="Menu/MarginContainer/Menu/HBoxContainer4/CloseButton" to="." method="_on_button_pressed"]
