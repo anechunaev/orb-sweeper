@@ -37,7 +37,7 @@ uniform float rivet_darken : hint_range(0.0, 1.0) = 0.4;
 uniform float detail_seed     : hint_range(0.0, 1.0) = 0.0;
 uniform float detail_density  : hint_range(0.0, 1.0) = 0.28;
 uniform float detail_strength : hint_range(0.0, 1.0) = 1.0;
-uniform vec3  detail_emission_color : source_color = vec3(1.0, 0.18, 0.10);
+uniform vec3  detail_emission_color : source_color = vec3(0.6, 0.48, 0.40);
 
 varying float v_state_raw;
 varying float v_edge;
