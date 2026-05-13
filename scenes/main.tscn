@@ -135,6 +135,59 @@ corner_detail = 5
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vxglm"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pm3ni"]
+content_margin_left = 15.0
+content_margin_top = 10.0
+content_margin_right = 15.0
+content_margin_bottom = 10.0
+bg_color = Color(0, 0, 0, 0.6)
+border_width_left = 1
+border_width_right = 1
+border_color = Color(0.175, 0.175, 0.175, 1)
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_og1vs"]
+content_margin_left = 15.0
+content_margin_top = 10.0
+content_margin_right = 15.0
+content_margin_bottom = 10.0
+bg_color = Color(0.1, 0.1, 0.1, 0.3)
+border_width_left = 1
+border_width_right = 1
+border_color = Color(0.175, 0.175, 0.175, 1)
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y6deb"]
+content_margin_left = 15.0
+content_margin_top = 10.0
+content_margin_right = 15.0
+content_margin_bottom = 10.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+border_width_top = 2
+border_color = Color(1, 1, 1, 0.75)
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2wyq8"]
+content_margin_left = 15.0
+content_margin_top = 10.0
+content_margin_right = 15.0
+content_margin_bottom = 10.0
+bg_color = Color(1, 1, 1, 0.75)
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jscy8"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pm3ni"]
@@ -146,6 +199,59 @@ corner_detail = 5
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2wyq8"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dp3eg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vxglm"]
+content_margin_left = 15.0
+content_margin_top = 10.0
+content_margin_right = 15.0
+content_margin_bottom = 10.0
+bg_color = Color(0, 0, 0, 0.6)
+border_width_left = 1
+border_width_right = 1
+border_color = Color(0.175, 0.175, 0.175, 1)
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2f3dj"]
+content_margin_left = 15.0
+content_margin_top = 10.0
+content_margin_right = 15.0
+content_margin_bottom = 10.0
+bg_color = Color(0.1, 0.1, 0.1, 0.3)
+border_width_left = 1
+border_width_right = 1
+border_color = Color(0.175, 0.175, 0.175, 1)
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yq6so"]
+content_margin_left = 15.0
+content_margin_top = 10.0
+content_margin_right = 15.0
+content_margin_bottom = 10.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+border_width_top = 2
+border_color = Color(1, 1, 1, 0.75)
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fv21b"]
+content_margin_left = 15.0
+content_margin_top = 10.0
+content_margin_right = 15.0
+content_margin_bottom = 10.0
+bg_color = Color(1, 1, 1, 0.75)
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
 
 [node name="Main" type="Node3D" unique_id=795857839 node_paths=PackedStringArray("click_sound", "screen_main_menu", "screen_new_game", "screen_custom_game", "screen_records", "screen_settings", "screen_about")]
 script = ExtResource("1_o6xl0")
@@ -679,6 +785,10 @@ theme_override_constants/side_margin = 10
 theme_override_constants/tab_separation = 0
 theme_override_fonts/font = ExtResource("11_trceg")
 theme_override_font_sizes/font_size = 16
+theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_pm3ni")
+theme_override_styles/tab_hovered = SubResource("StyleBoxFlat_og1vs")
+theme_override_styles/tab_selected = SubResource("StyleBoxFlat_y6deb")
+theme_override_styles/tab_focus = SubResource("StyleBoxFlat_2wyq8")
 current_tab = 0
 
 [node name="Classic" type="MarginContainer" parent="GUI/RecordsScreen/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/TabContainer" unique_id=2088929755]
@@ -1063,6 +1173,10 @@ size_flags_vertical = 3
 theme_override_constants/side_margin = 10
 theme_override_fonts/font = ExtResource("11_trceg")
 theme_override_font_sizes/font_size = 16
+theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_vxglm")
+theme_override_styles/tab_hovered = SubResource("StyleBoxFlat_2f3dj")
+theme_override_styles/tab_selected = SubResource("StyleBoxFlat_yq6so")
+theme_override_styles/tab_focus = SubResource("StyleBoxFlat_fv21b")
 current_tab = 0
 
 [node name="Rules" type="MarginContainer" parent="GUI/AboutMenu/About/PanelContainer/MarginContainer/AboutTabs" unique_id=190268880]
@@ -1158,9 +1272,9 @@ parameters/looping = true
 [connection signal="value_changed" from="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList/AudioPanel/MarginContainer/VBoxContainer/MasterVolume" to="GUI/SettingsMenu" method="_on_master_volume_changed"]
 [connection signal="value_changed" from="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList/AudioPanel/MarginContainer/VBoxContainer/MusicVolume" to="GUI/SettingsMenu" method="_on_music_volume_changed"]
 [connection signal="toggled" from="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList/HapticsPanel/MarginContainer/HBoxContainer/VibrationCheckBox" to="GUI/SettingsMenu" method="_on_vibration_toggled"]
+[connection signal="value_changed" from="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList/RotationSensitivityPanel/MarginContainer/VBoxContainer/RotationSensitivitySlider" to="GUI/SettingsMenu" method="_on_rotation_sensitivity_changed"]
 [connection signal="toggled" from="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList/OneFingerZoomPanel/MarginContainer/VBoxContainer/HBoxContainer/OneFingerZoomCheckBox" to="GUI/SettingsMenu" method="_on_one_finger_zoom_toggled"]
 [connection signal="toggled" from="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList/OneFingerZoomPanel/MarginContainer/VBoxContainer/ReverseZoomRow/ReverseZoomCheckBox" to="GUI/SettingsMenu" method="_on_reverse_zoom_toggled"]
-[connection signal="value_changed" from="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList/RotationSensitivityPanel/MarginContainer/VBoxContainer/RotationSensitivitySlider" to="GUI/SettingsMenu" method="_on_rotation_sensitivity_changed"]
 [connection signal="item_selected" from="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList/BackgroundPanel/MarginContainer/VBoxContainer/BackgroundStyleOption" to="GUI/SettingsMenu" method="_on_background_style_selected"]
 [connection signal="pressed" from="GUI/SettingsMenu/Settings/BackToMainFromSettings" to="." method="_on_back_to_main_from_settings_pressed"]
 [connection signal="pressed" from="GUI/SettingsMenu/Settings/BackToMainFromSettings" to="." method="_on_button_pressed"]
