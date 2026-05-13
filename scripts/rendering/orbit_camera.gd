@@ -61,6 +61,7 @@ var _touches: Dictionary = {}
 var _prev_touches: Dictionary = {}
 var _drag_origin: Vector2 = Vector2.ZERO
 var _drag_confirmed: bool = false
+var _touch_consumed: bool = false
 
 # -- mouse tracking --
 var _mouse_dragging: bool  = false
@@ -114,6 +115,15 @@ func reset_position() -> void:
 ## touch). Consumers use this to suppress clicks that happen during an orbit.
 func is_drag_active() -> bool:
 	return _mouse_dragging or _drag_confirmed or _zoom_gesture_active
+
+
+## Mark the active single-finger touch as consumed by a gameplay gesture
+## (e.g. a long-press flag committed). Subsequent motion on this touch is
+## ignored until release, and any in-flight rotational inertia is cancelled
+## so the sphere does not drift after the gesture.
+func consume_current_touch() -> void:
+	_touch_consumed = true
+	_angular_velocity = Vector3.ZERO
 
 func _ready() -> void:
 	reset_position()
@@ -180,6 +190,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			if _touches.size() == 0:
 				pointer_released.emit(was_drag)
 				_drag_confirmed = false
+				_touch_consumed = false
 				if was_zoom_gesture:
 					_zoom_gesture_armed = false
 					_zoom_gesture_active = false
@@ -246,6 +257,9 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _handle_single_drag(pos: Vector2, relative: Vector2) -> void:
+	if _touch_consumed:
+		return
+
 	if _zoom_gesture_armed or _zoom_gesture_active:
 		_zoom_gesture_active = true
 		_velocity_zoom += relative.y * single_finger_zoom_sensitivity

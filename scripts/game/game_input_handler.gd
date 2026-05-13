@@ -44,6 +44,8 @@ func _process(_delta: float) -> void:
 	if _awaiting_release and _press_face >= 0:
 		if Time.get_ticks_msec() / 1000.0 - _press_start_time >= long_press_time:
 			face_flagged.emit(_press_face)
+			if camera:
+				camera.consume_current_touch()
 			_awaiting_release = false
 			_press_face = -1
 
