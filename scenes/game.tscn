@@ -86,11 +86,6 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_c6rvn"]
-color = Color(1, 1, 1, 0.1254902)
-grow_begin = -10.0
-grow_end = -10.0
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n74k2"]
 content_margin_left = 16.0
 content_margin_top = 16.0
@@ -138,6 +133,11 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 corner_detail = 5
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_c6rvn"]
+color = Color(1, 1, 1, 0.1254902)
+grow_begin = -10.0
+grow_end = -10.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_js0lu"]
 content_margin_left = 16.0
@@ -498,6 +498,19 @@ icon = ExtResource("19_7025r")
 alignment = 0
 script = ExtResource("33_tapbtn")
 
+[node name="ExitButton" type="Button" parent="BottomContainer/HBoxContainer" unique_id=230473572]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("15_gxtfn")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_n74k2")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_si7kk")
+theme_override_styles/hover = SubResource("StyleBoxFlat_pn65j")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_5f8cm")
+text = "Exit to Main Menu"
+script = ExtResource("33_tapbtn")
+
 [node name="NewGameButton" type="Button" parent="BottomContainer/HBoxContainer" unique_id=116161871]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -521,11 +534,12 @@ anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_top = -159.5
-offset_bottom = 159.5
+offset_top = -160.5
+offset_bottom = 160.5
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_vertical = 6
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
@@ -634,27 +648,46 @@ text = "--- sec"
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="ExitButton" type="Button" parent="Menu/MarginContainer/Menu/HBoxContainer4" unique_id=230473572]
+[node name="NewGameButton2" type="Button" parent="Menu/MarginContainer/Menu/HBoxContainer4" unique_id=838042012]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("15_gxtfn")
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = SubResource("StyleBoxFlat_n74k2")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_si7kk")
-theme_override_styles/hover = SubResource("StyleBoxFlat_pn65j")
-theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_5f8cm")
-text = "Exit to Main Menu"
-
-[node name="CloseButton" type="Button" parent="Menu/MarginContainer/Menu/HBoxContainer4" unique_id=2002377537]
-layout_mode = 2
-size_flags_horizontal = 3
+theme_override_constants/h_separation = 16
 theme_override_constants/icon_max_width = 24
 theme_override_fonts/font = ExtResource("15_gxtfn")
 theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = ExtResource("16_twgab")
 theme_override_styles/pressed = ExtResource("17_02fa5")
 theme_override_styles/hover = ExtResource("18_nepv3")
-text = "Close"
+theme_override_styles/hover_pressed = ExtResource("17_02fa5")
+text = "New Game"
+icon_alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="Menu/MarginContainer/Menu/HBoxContainer4/NewGameButton2" unique_id=430888494]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -12.0
+offset_right = -16.0
+offset_bottom = 12.0
+grow_horizontal = 0
+grow_vertical = 2
+texture = ExtResource("12_wljb1")
+expand_mode = 4
+
+[node name="CloseButton" type="Button" parent="Menu/MarginContainer" unique_id=1896104611]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_constants/icon_max_width = 24
+theme_override_fonts/font = ExtResource("15_gxtfn")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("16_twgab")
+theme_override_styles/pressed = ExtResource("17_02fa5")
+theme_override_styles/hover = ExtResource("18_nepv3")
 icon = ExtResource("21_37s47")
 alignment = 2
 icon_alignment = 2
@@ -815,7 +848,7 @@ camera = NodePath("../Camera3D")
 game = NodePath("..")
 menu_controller = NodePath("../GameMenuController")
 
-[node name="GameMenuController" type="Node" parent="." unique_id=372588723 node_paths=PackedStringArray("game", "camera", "ui_menu", "ui_menu_status", "ui_menu_time", "ui_menu_difficulty_name", "ui_menu_difficulty_params", "ui_menu_record", "ui_exit_button", "menu_delay_timer", "ui_rate_prompt", "ui_rate_later_button", "ui_rate_now_button", "rate_prompt_delay_timer")]
+[node name="GameMenuController" type="Node" parent="." unique_id=372588723 node_paths=PackedStringArray("game", "camera", "ui_menu", "ui_menu_status", "ui_menu_time", "ui_menu_difficulty_name", "ui_menu_difficulty_params", "ui_menu_record", "ui_exit_button", "ui_pause_menu_nutton", "menu_delay_timer", "ui_rate_prompt", "ui_rate_later_button", "ui_rate_now_button", "rate_prompt_delay_timer")]
 script = ExtResource("30_menu")
 game = NodePath("..")
 camera = NodePath("../Camera3D")
@@ -825,7 +858,8 @@ ui_menu_time = NodePath("../Menu/MarginContainer/Menu/HBoxContainer/MenuCurrentT
 ui_menu_difficulty_name = NodePath("../Menu/MarginContainer/Menu/HBoxContainer3/MenuDifficultyName")
 ui_menu_difficulty_params = NodePath("../Menu/MarginContainer/Menu/HBoxContainer3/MenuDifficultyParams")
 ui_menu_record = NodePath("../Menu/MarginContainer/Menu/HBoxContainer2/MenuRecord")
-ui_exit_button = NodePath("../Menu/MarginContainer/Menu/HBoxContainer4/ExitButton")
+ui_exit_button = NodePath("../BottomContainer/HBoxContainer/ExitButton")
+ui_pause_menu_nutton = NodePath("../BottomContainer/HBoxContainer/MenuButton")
 menu_delay_timer = NodePath("../UIMenuDelay")
 ui_rate_prompt = NodePath("../RatePrompt")
 ui_rate_later_button = NodePath("../RatePrompt/Dialog/MarginContainer/VBoxContainer/Buttons/LaterButton")
@@ -834,9 +868,11 @@ rate_prompt_delay_timer = NodePath("../UIRatePromptDelay")
 
 [connection signal="tapped" from="BottomContainer/HBoxContainer/MenuButton" to="." method="_on_button_pressed"]
 [connection signal="tapped" from="BottomContainer/HBoxContainer/MenuButton" to="GameMenuController" method="_on_menu_button_pressed"]
+[connection signal="pressed" from="BottomContainer/HBoxContainer/ExitButton" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="BottomContainer/HBoxContainer/ExitButton" to="GameMenuController" method="_on_exit_to_main_menu_pressed"]
 [connection signal="tapped" from="BottomContainer/HBoxContainer/NewGameButton" to="." method="_on_button_pressed"]
 [connection signal="tapped" from="BottomContainer/HBoxContainer/NewGameButton" to="GameMenuController" method="_on_new_game_button_pressed"]
-[connection signal="pressed" from="Menu/MarginContainer/Menu/HBoxContainer4/ExitButton" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="Menu/MarginContainer/Menu/HBoxContainer4/ExitButton" to="GameMenuController" method="_on_exit_to_main_menu_pressed"]
-[connection signal="pressed" from="Menu/MarginContainer/Menu/HBoxContainer4/CloseButton" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="Menu/MarginContainer/Menu/HBoxContainer4/CloseButton" to="GameMenuController" method="_on_close_button_pressed"]
+[connection signal="pressed" from="Menu/MarginContainer/Menu/HBoxContainer4/NewGameButton2" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Menu/MarginContainer/Menu/HBoxContainer4/NewGameButton2" to="GameMenuController" method="_on_new_game_button_pressed"]
+[connection signal="pressed" from="Menu/MarginContainer/CloseButton" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Menu/MarginContainer/CloseButton" to="GameMenuController" method="_on_close_button_pressed"]

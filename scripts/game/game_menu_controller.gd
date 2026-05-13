@@ -18,6 +18,7 @@ signal exit_requested
 @export var ui_menu_difficulty_params: Label
 @export var ui_menu_record: Label
 @export var ui_exit_button: Button
+@export var ui_pause_menu_nutton: Button
 @export var menu_delay_timer: Timer
 
 @export_group("Rate Prompt UI")
@@ -64,10 +65,15 @@ func toggle_menu(show_menu: bool = false) -> void:
 			diff_name += " · No Guess"
 		ui_menu_difficulty_name.text = diff_name
 		ui_menu_difficulty_params.text = "d=" + str(int(game.mine_ratio * 100)) + "% s=" + str(game.subdivision)
+
+		ui_exit_button.visible = true
+		ui_pause_menu_nutton.visible = false
 	camera.toggle_input_handling(!show_menu)
 	ui_menu.visible = show_menu
 	if not show_menu:
 		_hide_rate_prompt()
+		ui_exit_button.visible = false
+		ui_pause_menu_nutton.visible = true
 
 
 ## Returns true when the menu overlay is currently on-screen.
