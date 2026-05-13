@@ -3,6 +3,8 @@
 ## is generated.
 extends Node
 
+const GAME_SCENE := preload("res://scenes/game.tscn")
+
 var subdivision: int = 3
 var density: float = 0.15
 var no_guess_mode: bool = false
@@ -26,3 +28,9 @@ func save() -> void:
 	SettingsStore.set_value("custom_game", "density", density)
 	SettingsStore.set_value("custom_game", "no_guess_mode", no_guess_mode)
 	SettingsStore.save()
+
+
+## Persist the current preferences and launch the gameplay scene.
+func start_game(tree: SceneTree) -> void:
+	save()
+	tree.change_scene_to_packed(GAME_SCENE)

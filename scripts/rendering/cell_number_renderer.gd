@@ -112,11 +112,11 @@ const DIGIT_PATTERNS: Array[Array] = [
 
 const _BMP_W := 5
 const _BMP_H := 7
-const _SCALE := 5          # render each bitmap pixel as _SCALE × _SCALE
-const _PAD   := 3          # padding around glyph inside cell
+const _SCALE := 5
+const _PAD   := 3
 
-const _CELL_W := _BMP_W * _SCALE + _PAD * 2   # 31
-const _CELL_H := _BMP_H * _SCALE + _PAD * 2   # 41
+const _CELL_W := _BMP_W * _SCALE + _PAD * 2
+const _CELL_H := _BMP_H * _SCALE + _PAD * 2
 
 var _multi_mesh: MultiMesh
 var _mmi: MultiMeshInstance3D

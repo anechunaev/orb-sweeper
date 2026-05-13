@@ -4,8 +4,6 @@ extends Control
 
 @export var no_guess_check: CheckButton
 
-@onready var game_scene = preload("res://scenes/game.tscn")
-
 
 func _ready() -> void:
 	no_guess_check.button_pressed = GameConfig.no_guess_mode
@@ -15,8 +13,7 @@ func _start_classic(index: int) -> void:
 	var preset: Dictionary = DifficultyPresets.CLASSIC[index]
 	GameConfig.density = preset["density"]
 	GameConfig.subdivision = preset["subdivision"]
-	GameConfig.save()
-	get_tree().change_scene_to_packed(game_scene)
+	GameConfig.start_game(get_tree())
 
 
 func _on_no_guess_toggled(pressed: bool) -> void:

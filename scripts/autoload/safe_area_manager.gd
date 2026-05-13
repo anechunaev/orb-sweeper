@@ -4,8 +4,12 @@
 ## untouched.
 extends Node
 
+## Emitted whenever the safe-area insets change (rotation, foldable transition,
+## window resize). [param insets] is the new value of [member insets].
 signal insets_changed(insets: Vector4)
 
+## Current safe-area insets in viewport pixels, packed as
+## (left, top, right, bottom). Zero on platforms without insets.
 var insets: Vector4 = Vector4.ZERO
 
 

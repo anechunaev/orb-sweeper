@@ -11,15 +11,13 @@ extends Control
 @export var no_guess_check: CheckButton
 @export var no_guess_hint_label: Label
 
-@onready var game_scene = preload("res://scenes/game.tscn")
-
 var _size: int = 3
 var _cells_count: int = 92
 var _density: float = 0.15
 var _no_guess: bool = false
 
 
-func _ready():
+func _ready() -> void:
 	_size = GameConfig.subdivision
 	_density = GameConfig.density
 	_no_guess = GameConfig.no_guess_mode
@@ -55,8 +53,7 @@ func _on_start_game_pressed() -> void:
 	GameConfig.subdivision = _size
 	GameConfig.density = _density
 	GameConfig.no_guess_mode = _no_guess
-	GameConfig.save()
-	get_tree().change_scene_to_packed(game_scene)
+	GameConfig.start_game(get_tree())
 
 
 func _on_size_changed(value: float) -> void:

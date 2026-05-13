@@ -5,6 +5,8 @@
 class_name TapOnlyButton
 extends Button
 
+## Emitted on release when the press did not drag past
+## [member drag_cancel_threshold_px].
 signal tapped()
 
 @export var drag_cancel_threshold_px: float = 16.0

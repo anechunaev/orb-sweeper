@@ -1,3 +1,5 @@
+## "About" screen: renders the rules summary and the credits / license /
+## source-code links in two BBCode-formatted [RichTextLabel]s.
 class_name ScreenAbout
 extends Control
 
