@@ -921,6 +921,7 @@ theme_override_constants/separation = 10
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+scroll_deadzone = 16
 
 [node name="SettingsList" type="VBoxContainer" parent="GUI/SettingsMenu/Settings/ScrollContainer" unique_id=1376415012]
 layout_mode = 2
@@ -930,6 +931,7 @@ theme_override_constants/separation = 10
 
 [node name="AudioPanel" type="PanelContainer" parent="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList" unique_id=364558979]
 layout_mode = 2
+mouse_filter = 1
 theme_override_styles/panel = ExtResource("10_eb6dy")
 
 [node name="MarginContainer" type="MarginContainer" parent="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList/AudioPanel" unique_id=345107285]
@@ -979,6 +981,7 @@ ticks_position = 3
 
 [node name="HapticsPanel" type="PanelContainer" parent="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList" unique_id=1354674526]
 layout_mode = 2
+mouse_filter = 1
 theme_override_styles/panel = ExtResource("10_eb6dy")
 
 [node name="MarginContainer" type="MarginContainer" parent="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList/HapticsPanel" unique_id=1705123423]
@@ -1004,6 +1007,7 @@ button_pressed = true
 
 [node name="RotationSensitivityPanel" type="PanelContainer" parent="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList" unique_id=9200001]
 layout_mode = 2
+mouse_filter = 1
 theme_override_styles/panel = ExtResource("10_eb6dy")
 
 [node name="MarginContainer" type="MarginContainer" parent="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList/RotationSensitivityPanel" unique_id=9200002]
@@ -1037,6 +1041,7 @@ ticks_position = 3
 
 [node name="OneFingerZoomPanel" type="PanelContainer" parent="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList" unique_id=9100001]
 layout_mode = 2
+mouse_filter = 1
 theme_override_styles/panel = ExtResource("10_eb6dy")
 
 [node name="MarginContainer" type="MarginContainer" parent="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList/OneFingerZoomPanel" unique_id=9100002]
@@ -1086,6 +1091,7 @@ layout_mode = 2
 
 [node name="BackgroundPanel" type="PanelContainer" parent="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList" unique_id=826455961]
 layout_mode = 2
+mouse_filter = 1
 theme_override_styles/panel = ExtResource("10_eb6dy")
 
 [node name="MarginContainer" type="MarginContainer" parent="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList/BackgroundPanel" unique_id=1086885403]
@@ -1238,8 +1244,8 @@ parameters/looping = true
 
 [connection signal="pressed" from="GUI/MainMenu/MainMenu/NewGame" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="GUI/MainMenu/MainMenu/NewGame" to="." method="_on_new_game_pressed"]
-[connection signal="pressed" from="GUI/MainMenu/MainMenu/Records" to="." method="_on_records_pressed"]
 [connection signal="pressed" from="GUI/MainMenu/MainMenu/Records" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="GUI/MainMenu/MainMenu/Records" to="." method="_on_records_pressed"]
 [connection signal="pressed" from="GUI/MainMenu/MainMenu/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="GUI/MainMenu/MainMenu/Settings" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="GUI/MainMenu/MainMenu/About" to="." method="_on_about_pressed"]
@@ -1253,8 +1259,8 @@ parameters/looping = true
 [connection signal="pressed" from="GUI/NewGameMenu/NewGame/NormalMode" to="GUI/NewGameMenu" method="_on_normal_mode_pressed"]
 [connection signal="pressed" from="GUI/NewGameMenu/NewGame/HardMode" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="GUI/NewGameMenu/NewGame/HardMode" to="GUI/NewGameMenu" method="_on_hard_mode_pressed"]
-[connection signal="pressed" from="GUI/NewGameMenu/NewGame/CustomMode" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="GUI/NewGameMenu/NewGame/CustomMode" to="." method="_on_custom_mode_pressed"]
+[connection signal="pressed" from="GUI/NewGameMenu/NewGame/CustomMode" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="GUI/NewGameMenu/NewGame/BackToMainMenu" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="GUI/NewGameMenu/NewGame/BackToMainMenu" to="." method="_on_back_to_main_menu_pressed"]
 [connection signal="value_changed" from="GUI/CustomGameMenu/CustomGame/PanelContainer/MarginContainer/VBoxContainer/HSlider" to="GUI/CustomGameMenu" method="_on_size_changed"]
