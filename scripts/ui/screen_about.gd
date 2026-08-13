@@ -21,6 +21,12 @@ Each revealed cell shows how many of its neighbors are mines. Hexagons have 6 ne
 [b]Winning & losing[/b]
 You win when every non-mine cell is revealed. You lose if you reveal a mine.
 
+[b]Efficiency[/b]
+Efficiency compares your run to the fewest taps the board could have been cleared in: minimum taps divided by your taps.
+Every input counts as a tap (reveals, flags, unflags and chords), including ones that do nothing, like tapping a flagged cell.
+Chording can push you above 100%; flagging pushes it down.
+Your best efficiency is tracked per difficulty next to your best time.
+
 [b]No-guess mode[/b]
 When enabled, the generated puzzle is guaranteed to be solvable through logic alone — no guessing required.
 When game is on, there is an indicator at the top middle of the screen representing current state of the game. Green square with letters "NG" means that No-Guess mode is on, and the board is guaranteed to be solved. Red square with letter "G" means that you probably will need to guess eventually."""

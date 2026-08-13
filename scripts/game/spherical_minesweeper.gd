@@ -104,6 +104,9 @@ var _face_count:   int = 0
 var _cleared_count: int = 0
 var _flagged_count: int = 0
 
+var _min_clicks: int = 0
+var _click_count: int = 0
+
 var _ng_thread: Thread = null
 var _ng_pending_first_click: int = -1
 
@@ -179,6 +182,8 @@ func _generate_board() -> void:
 	_mine_count    = 0
 	_cleared_count = 0
 	_flagged_count = 0
+	_min_clicks    = 0
+	_click_count   = 0
 
 	phase = GamePhase.WAITING_FIRST
 
@@ -230,14 +235,20 @@ func _place_mines(safe_face: int) -> void:
 	_neighbor_count = MinePlacer.compute_neighbor_counts(
 		_result.adjacency, _face_count, _is_mine)
 
+	_min_clicks = MinePlacer.compute_min_clicks(
+		_result.adjacency, _face_count, _is_mine, _neighbor_count)
+
 func _setup_camera() -> void:
 	if camera:
 		camera.transform.origin.x = -1.0 * radius - 15.0
 		camera.set_distance(abs(camera.transform.origin.x), radius + 5.0, radius + 40.0)
 
 func _on_reveal(fi: int) -> void:
-	if phase == GamePhase.GENERATING:
+	# Also covers GENERATING: taps during no-guess generation are dropped.
+	if phase != GamePhase.WAITING_FIRST and phase != GamePhase.PLAYING:
 		return
+
+	_click_count += 1
 
 	if _flagged[fi] == 1:
 		sound_stop.play()
@@ -260,9 +271,6 @@ func _on_reveal(fi: int) -> void:
 				_reveal_cell(fi)
 		GamePhase.PLAYING:
 			_reveal_cell(fi)
-
-
-# ---- no-guess generation (background Thread) ---------------------------
 
 
 func _start_ng_generation(fi: int) -> void:
@@ -292,6 +300,9 @@ func _finish_ng_generation() -> void:
 		if _is_mine[face_id] == 1:
 			_mine_indices.append(face_id)
 	_mine_count = _mine_indices.size()
+
+	_min_clicks = MinePlacer.compute_min_clicks(
+		_result.adjacency, _face_count, _is_mine, _neighbor_count)
 
 	no_guess_generating.emit(false)
 	if not result.solvable:
@@ -352,7 +363,7 @@ func _try_chord(fi: int) -> void:
 	if flag_count != _neighbor_count[fi]:
 		sound_stop.play()
 		return
-	
+
 	sound_chord.play()
 
 	for ni: int in neighbours:
@@ -402,6 +413,9 @@ func _try_auto_flag(fi: int) -> void:
 func _on_flag(fi: int) -> void:
 	if phase != GamePhase.PLAYING and phase != GamePhase.WAITING_FIRST:
 		return
+
+	_click_count += 1
+
 	if _revealed[fi] == 1:
 		_try_auto_flag(fi)
 		return
@@ -467,6 +481,7 @@ func _check_win() -> void:
 	if _cleared_count >= _face_count - _mine_count:
 		phase = GamePhase.WON
 		_final_time_usec = Time.get_ticks_usec() - _start_time_usec
+		var final_efficiency := get_efficiency()
 		game_ui_timer.stop()
 		for mi: int in _mine_indices:
 			if _flagged[mi] == 0:
@@ -478,7 +493,8 @@ func _check_win() -> void:
 						_result.face_centers[mi].normalized())
 		_manager.flush()
 		sound_won.play()
-		RecordsManager.update_record(subdivision, mine_ratio, _final_time_usec, no_guess)
+		RecordsManager.update_record(subdivision, mine_ratio, _final_time_usec,
+			no_guess, final_efficiency)
 		LeaderboardsManager.submit_score(subdivision, mine_ratio, no_guess, _final_time_usec)
 		RatePromptManager.record_win()
 		_emit_stats()
@@ -500,6 +516,8 @@ func restart() -> void:
 	_mine_count = clampi(roundi(_face_count * mine_ratio), 1, _face_count - 1)
 	_cleared_count = 0
 	_flagged_count = 0
+	_min_clicks = 0
+	_click_count = 0
 	_manager.reset()
 	_manager.flush()
 	if _number_renderer:
@@ -554,6 +572,11 @@ func get_current_time() -> int:
 		return 0
 	return Time.get_ticks_usec() - _start_time_usec
 
+func get_efficiency() -> float:
+	if _min_clicks <= 0 or _click_count <= 0:
+		return 0.0
+	return 100.0 * _min_clicks / _click_count
+
 ## Returns face count, mine count, cleared count, flagged count.
 func get_stats() -> Dictionary:
 	return {
@@ -561,7 +584,8 @@ func get_stats() -> Dictionary:
 		"mine_count":    _mine_count,
 		"cleared_count": _cleared_count,
 		"flagged_count": _flagged_count,
-		"current_time": get_current_time()
+		"current_time": get_current_time(),
+		"efficiency": get_efficiency()
 	}
 
 func _emit_stats() -> void:

@@ -26,7 +26,7 @@ const CLASSIC_DIFFICULTIES := DifficultyPresets.CLASSIC
 
 @onready var _record_card_scene: PackedScene = preload("res://nodes/record_card.tscn")
 
-enum SortField { DENSITY, TIME, DATE }
+enum SortField { DENSITY, TIME, DATE, EFFICIENCY }
 enum SortDir   { ASCENDING, DESCENDING }
 
 var _custom_entries: Array[Dictionary] = []
@@ -76,6 +76,7 @@ func refresh() -> void:
 func _setup_sort_controls() -> void:
 	sort_by_option.clear()
 	sort_by_option.add_item("Time", SortField.TIME)
+	sort_by_option.add_item("Efficiency", SortField.EFFICIENCY)
 	sort_by_option.add_item("Difficulty", SortField.DENSITY)
 	sort_by_option.add_item("Date", SortField.DATE)
 	sort_by_option.selected = 0
@@ -90,7 +91,12 @@ func _setup_sort_controls() -> void:
 
 
 func _on_sort_changed(_index: int) -> void:
-	_current_sort_field = sort_by_option.get_selected_id() as SortField
+	var field := sort_by_option.get_selected_id() as SortField
+	if field != _current_sort_field:
+		var natural := SortDir.DESCENDING if field == SortField.EFFICIENCY else SortDir.ASCENDING
+		sort_dir_option.select(sort_dir_option.get_item_index(natural))
+
+	_current_sort_field = field
 	_current_sort_dir = sort_dir_option.get_selected_id() as SortDir
 	_sort_and_display_custom()
 
@@ -112,14 +118,8 @@ func _add_preset_card(container: VBoxContainer, records: Dictionary,
 	var key := RecordsManager.get_key(diff["subdivision"], diff["density"], no_guess)
 	var card := _record_card_scene.instantiate()
 	container.add_child(card)
-
-	if records.has(key):
-		var rec: Dictionary = records[key]
-		card.display_record(rec["time"], rec["date"],
-			diff["subdivision"], diff["density"], no_guess)
-	else:
-		card.display_record(-1, "",
-			diff["subdivision"], diff["density"], no_guess)
+	card.display_record(records.get(key, {}),
+		diff["subdivision"], diff["density"], no_guess)
 
 
 func _build_custom_tab(records: Dictionary) -> void:
@@ -142,14 +142,12 @@ func _build_custom_tab(records: Dictionary) -> void:
 
 		var subdivision := parts[0].to_int()
 		var density := parts[1].to_float()
-		var rec: Dictionary = records[key]
 
 		_custom_entries.append({
 			"subdivision": subdivision,
 			"density": density,
 			"no_guess": no_guess,
-			"time": rec["time"],
-			"date": rec["date"],
+			"record": records[key],
 		})
 
 	_sort_and_display_custom()
@@ -162,24 +160,29 @@ func _sort_and_display_custom() -> void:
 	for entry: Dictionary in _custom_entries:
 		var card := _record_card_scene.instantiate()
 		custom_list.add_child(card)
-		card.display_record(entry["time"], entry["date"],
+		card.display_record(entry["record"],
 			entry["subdivision"], entry["density"], entry.get("no_guess", false))
 
 
 func _compare_entries(a: Dictionary, b: Dictionary) -> bool:
 	var val_a: Variant
 	var val_b: Variant
+	var rec_a: Dictionary = a["record"]
+	var rec_b: Dictionary = b["record"]
 
 	match _current_sort_field:
 		SortField.DENSITY:
 			val_a = a["density"]
 			val_b = b["density"]
 		SortField.TIME:
-			val_a = a["time"]
-			val_b = b["time"]
+			val_a = rec_a.get("time", 0)
+			val_b = rec_b.get("time", 0)
 		SortField.DATE:
-			val_a = a["date"]
-			val_b = b["date"]
+			val_a = rec_a.get("date", "")
+			val_b = rec_b.get("date", "")
+		SortField.EFFICIENCY:
+			val_a = rec_a.get("best_efficiency", -1.0)
+			val_b = rec_b.get("best_efficiency", -1.0)
 
 	if _current_sort_dir == SortDir.ASCENDING:
 		return val_a < val_b

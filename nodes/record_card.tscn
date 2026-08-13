@@ -11,13 +11,14 @@ grow_end = -10.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dp3eg"]
 
-[node name="RecordCard" type="VBoxContainer" unique_id=1460981375 node_paths=PackedStringArray("difficulty_label", "time_label", "dif_key_label", "date_label")]
+[node name="RecordCard" type="VBoxContainer" unique_id=1460981375 node_paths=PackedStringArray("difficulty_label", "time_label", "dif_key_label", "date_label", "efficiency_label")]
 theme_override_constants/separation = 2
 script = ExtResource("1_oad6m")
 difficulty_label = NodePath("HBoxContainer/Difficulty")
 time_label = NodePath("HBoxContainer/Time")
 dif_key_label = NodePath("HBoxContainer2/Key")
 date_label = NodePath("HBoxContainer2/Date")
+efficiency_label = NodePath("HBoxContainer3/Efficiency")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=555227063]
 layout_mode = 2
@@ -53,6 +54,28 @@ size_flags_horizontal = 3
 theme_override_styles/separator = SubResource("StyleBoxEmpty_dp3eg")
 
 [node name="Date" type="Label" parent="HBoxContainer2" unique_id=100038907]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.5019608)
+theme_override_fonts/font = ExtResource("3_d6p18")
+theme_override_font_sizes/font_size = 14
+text = "---"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="." unique_id=764310582]
+layout_mode = 2
+
+[node name="EfficiencyCaption" type="Label" parent="HBoxContainer3" unique_id=1329845077]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.5019608)
+theme_override_fonts/font = ExtResource("3_d6p18")
+theme_override_font_sizes/font_size = 14
+text = "Best efficiency"
+
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer3" unique_id=2013557719]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_dp3eg")
+
+[node name="Efficiency" type="Label" parent="HBoxContainer3" unique_id=471902864]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 0.5019608)
 theme_override_fonts/font = ExtResource("3_d6p18")

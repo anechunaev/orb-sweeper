@@ -1,6 +1,7 @@
-## Autoload that persists best-time records to [code]user://records.json[/code].
-## Records are keyed by subdivision + density + no-guess flag so classic and
-## no-guess runs on the same difficulty are tracked separately.
+## Autoload that persists best-time and best-efficiency records to
+## [code]user://records.json[/code]. Records are keyed by subdivision + density
+## + no-guess flag so classic and no-guess runs on the same difficulty are
+## tracked separately.
 extends Node
 
 const SAVE_PATH := "user://records.json"
@@ -55,21 +56,39 @@ func load_records() -> Dictionary:
 	return records
 
 
-## Store [param new_time] as the best record for the given difficulty if it
-## beats the current record (or no record exists yet). Persists on write.
-func update_record(subdivision: int, density: float, new_time: int, no_guess: bool = false) -> void:
+## Store a finished run under the given difficulty. Best time and best
+## efficiency are tracked as independent personal bests, so a slow but tidy run
+## can hold the efficiency record while a fast sloppy one holds the time.
+## [param efficiency] is a percentage; pass [code]0.0[/code] when unknown.
+## Persists only when something actually improved.
+func update_record(subdivision: int, density: float, new_time: int,
+		no_guess: bool = false, efficiency: float = 0.0) -> void:
 	var key = get_key(subdivision, density, no_guess)
+	var now = _get_now_string()
+	var record: Dictionary = records.get(key, {})
+	var dirty := false
 
-	if not records.has(key) or new_time < records[key]["time"]:
-		records[key] = {
-			"time": new_time,
-			"date": _get_now_string()
-		}
+	if not record.has("time") or new_time < record["time"]:
+		record["time"] = new_time
+		record["efficiency"] = efficiency
+		record["date"] = now
+		dirty = true
+
+	if efficiency > 0.0 and efficiency > record.get("best_efficiency", 0.0):
+		record["best_efficiency"] = efficiency
+		record["best_efficiency_time"] = new_time
+		record["best_efficiency_date"] = now
+		dirty = true
+
+	if dirty:
+		records[key] = record
 		save_records()
 
 
-## Return the stored record dictionary ([code]{time, date}[/code]) for the
-## given difficulty, or an empty dictionary if none exists.
+## Return the stored record dictionary for the given difficulty, or an empty
+## dictionary if none exists. Entries written before efficiency tracking carry
+## only [code]{time, date}[/code], so always read the efficiency fields with a
+## default.
 func get_record(subdivision: int, density: float, no_guess: bool = false) -> Dictionary:
 	var key = get_key(subdivision, density, no_guess)
 
@@ -86,6 +105,20 @@ func get_best_time(subdivision: int, density: float, no_guess: bool = false) -> 
 	if record.has("time"):
 		return record["time"]
 	return -1
+
+
+## Return the best efficiency (percentage) for the given difficulty, or
+## [code]-1.0[/code] if none is stored yet.
+func get_best_efficiency(subdivision: int, density: float, no_guess: bool = false) -> float:
+	var record = get_record(subdivision, density, no_guess)
+	return record.get("best_efficiency", -1.0)
+
+
+## Return the efficiency achieved during the best-*time* run, or
+## [code]-1.0[/code] if none is stored yet.
+func get_record_efficiency(subdivision: int, density: float, no_guess: bool = false) -> float:
+	var record = get_record(subdivision, density, no_guess)
+	return record.get("efficiency", -1.0)
 
 
 func _get_now_string() -> String:

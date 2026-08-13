@@ -17,6 +17,8 @@ signal exit_requested
 @export var ui_menu_difficulty_name: Label
 @export var ui_menu_difficulty_params: Label
 @export var ui_menu_record: Label
+@export var ui_menu_efficiency: Label
+@export var ui_menu_record_efficiency: Label
 @export var ui_exit_button: Button
 @export var ui_pause_menu_nutton: Button
 @export var menu_delay_timer: Timer
@@ -49,17 +51,24 @@ func toggle_menu(show_menu: bool = false) -> void:
 
 		var status := "Game is on!"
 		var time := TimeFormatter.format_time(0)
+		var efficiency := EfficiencyFormatter.format_efficiency(0.0)
 		if game.phase == SphericalMinesweeper.GamePhase.WON:
 			status = "You won!"
 			time = TimeFormatter.format_time(game.get_current_time())
+			efficiency = EfficiencyFormatter.format_efficiency(game.get_efficiency())
 		elif game.phase == SphericalMinesweeper.GamePhase.LOST:
 			status = "You lost!"
 			time = TimeFormatter.format_time(game.get_current_time())
+			efficiency = EfficiencyFormatter.format_efficiency(game.get_efficiency())
 		var record_str := TimeFormatter.format_time(
 			RecordsManager.get_best_time(game.subdivision, game.mine_ratio, game.no_guess))
+		var record_efficiency_str := EfficiencyFormatter.format_efficiency(
+			RecordsManager.get_best_efficiency(game.subdivision, game.mine_ratio, game.no_guess))
 		ui_menu_status.text = status
 		ui_menu_time.text = time
+		ui_menu_efficiency.text = efficiency
 		ui_menu_record.text = record_str
+		ui_menu_record_efficiency.text = record_efficiency_str
 		var diff_name := DifficultyPresets.get_difficulty_name(game.mine_ratio)
 		if game.no_guess:
 			diff_name += " · No Guess"

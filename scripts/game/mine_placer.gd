@@ -76,3 +76,44 @@ static func compute_neighbor_counts(adjacency: Array,
 			count += is_mine[ni]
 		counts[fi] = count
 	return counts
+
+
+## Minimum number of clicks needed to clear the board using reveals only.
+## This is the spherical equivalent of minesweeper's 3BV
+## and forms the numerator of the efficiency score.
+static func compute_min_clicks(adjacency: Array,
+							   face_count: int,
+							   is_mine: PackedByteArray,
+							   neighbor_count: PackedInt32Array) -> int:
+	var opened := PackedByteArray()
+	opened.resize(face_count)
+
+	var clicks := 0
+
+	for fi in face_count:
+		if is_mine[fi] == 1 or neighbor_count[fi] != 0 or opened[fi] == 1:
+			continue
+
+		clicks += 1
+		opened[fi] = 1
+
+		var queue := PackedInt32Array()
+		queue.append(fi)
+		var head := 0
+		while head < queue.size():
+			var ci := queue[head]
+			head += 1
+			if neighbor_count[ci] != 0:
+				continue
+			# A zero face never borders a mine, so mines are never enqueued.
+			var neighbours: Array = adjacency[ci]
+			for ni: int in neighbours:
+				if opened[ni] == 0:
+					opened[ni] = 1
+					queue.append(ni)
+
+	for fi in face_count:
+		if is_mine[fi] == 0 and opened[fi] == 0:
+			clicks += 1
+
+	return clicks

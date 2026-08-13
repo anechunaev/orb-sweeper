@@ -595,6 +595,27 @@ theme_override_fonts/font = ExtResource("20_m4url")
 theme_override_font_sizes/font_size = 18
 text = "--- sec"
 
+[node name="HBoxContainerEfficiency" type="HBoxContainer" parent="Menu/MarginContainer/Menu" unique_id=1204885337]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="Label" type="Label" parent="Menu/MarginContainer/Menu/HBoxContainerEfficiency" unique_id=1721043918]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("20_m4url")
+theme_override_font_sizes/font_size = 18
+text = "Efficiency"
+
+[node name="HSeparator" type="HSeparator" parent="Menu/MarginContainer/Menu/HBoxContainerEfficiency" unique_id=308654721]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxLine_c6rvn")
+
+[node name="MenuEfficiency" type="Label" parent="Menu/MarginContainer/Menu/HBoxContainerEfficiency" unique_id=1965507064]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("20_m4url")
+theme_override_font_sizes/font_size = 18
+text = "---"
+
 [node name="HBoxContainer3" type="HBoxContainer" parent="Menu/MarginContainer/Menu" unique_id=1859204466]
 layout_mode = 2
 theme_override_constants/separation = 10
@@ -643,6 +664,27 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("20_m4url")
 theme_override_font_sizes/font_size = 18
 text = "--- sec"
+
+[node name="HBoxContainerBestEfficiency" type="HBoxContainer" parent="Menu/MarginContainer/Menu" unique_id=1592280453]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="Label" type="Label" parent="Menu/MarginContainer/Menu/HBoxContainerBestEfficiency" unique_id=657031294]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("20_m4url")
+theme_override_font_sizes/font_size = 18
+text = "Best efficiency"
+
+[node name="HSeparator" type="HSeparator" parent="Menu/MarginContainer/Menu/HBoxContainerBestEfficiency" unique_id=1148903726]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxLine_c6rvn")
+
+[node name="MenuBestEfficiency" type="Label" parent="Menu/MarginContainer/Menu/HBoxContainerBestEfficiency" unique_id=1836604517]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("20_m4url")
+theme_override_font_sizes/font_size = 18
+text = "---"
 
 [node name="HBoxContainer4" type="HBoxContainer" parent="Menu/MarginContainer/Menu" unique_id=17966093]
 layout_mode = 2
@@ -848,7 +890,7 @@ camera = NodePath("../Camera3D")
 game = NodePath("..")
 menu_controller = NodePath("../GameMenuController")
 
-[node name="GameMenuController" type="Node" parent="." unique_id=372588723 node_paths=PackedStringArray("game", "camera", "ui_menu", "ui_menu_status", "ui_menu_time", "ui_menu_difficulty_name", "ui_menu_difficulty_params", "ui_menu_record", "ui_exit_button", "ui_pause_menu_nutton", "menu_delay_timer", "ui_rate_prompt", "ui_rate_later_button", "ui_rate_now_button", "rate_prompt_delay_timer")]
+[node name="GameMenuController" type="Node" parent="." unique_id=372588723 node_paths=PackedStringArray("game", "camera", "ui_menu", "ui_menu_status", "ui_menu_time", "ui_menu_difficulty_name", "ui_menu_difficulty_params", "ui_menu_record", "ui_menu_efficiency", "ui_menu_record_efficiency", "ui_exit_button", "ui_pause_menu_nutton", "menu_delay_timer", "ui_rate_prompt", "ui_rate_later_button", "ui_rate_now_button", "rate_prompt_delay_timer")]
 script = ExtResource("30_menu")
 game = NodePath("..")
 camera = NodePath("../Camera3D")
@@ -858,6 +900,8 @@ ui_menu_time = NodePath("../Menu/MarginContainer/Menu/HBoxContainer/MenuCurrentT
 ui_menu_difficulty_name = NodePath("../Menu/MarginContainer/Menu/HBoxContainer3/MenuDifficultyName")
 ui_menu_difficulty_params = NodePath("../Menu/MarginContainer/Menu/HBoxContainer3/MenuDifficultyParams")
 ui_menu_record = NodePath("../Menu/MarginContainer/Menu/HBoxContainer2/MenuRecord")
+ui_menu_efficiency = NodePath("../Menu/MarginContainer/Menu/HBoxContainerEfficiency/MenuEfficiency")
+ui_menu_record_efficiency = NodePath("../Menu/MarginContainer/Menu/HBoxContainerBestEfficiency/MenuBestEfficiency")
 ui_exit_button = NodePath("../BottomContainer/HBoxContainer/ExitButton")
 ui_pause_menu_nutton = NodePath("../BottomContainer/HBoxContainer/MenuButton")
 menu_delay_timer = NodePath("../UIMenuDelay")

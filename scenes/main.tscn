@@ -1195,6 +1195,7 @@ metadata/_tab_index = 0
 
 [node name="RulesText" type="RichTextLabel" parent="GUI/AboutMenu/About/PanelContainer/MarginContainer/AboutTabs/Rules" unique_id=1025014676]
 layout_mode = 2
+theme_override_constants/paragraph_separation = 10
 theme_override_fonts/normal_font = ExtResource("11_trceg")
 theme_override_font_sizes/normal_font_size = 14
 bbcode_enabled = true

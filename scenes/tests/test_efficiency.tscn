@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://b3efftest123"]
+
+[ext_resource type="Script" path="res://scripts/tests/test_efficiency.gd" id="1_efftest"]
+
+[node name="TestEfficiency" type="Node"]
+script = ExtResource("1_efftest")
