@@ -1242,10 +1242,10 @@ autoplay = true
 bus = &"Music"
 parameters/looping = true
 
-[connection signal="pressed" from="GUI/MainMenu/MainMenu/NewGame" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="GUI/MainMenu/MainMenu/NewGame" to="." method="_on_new_game_pressed"]
-[connection signal="pressed" from="GUI/MainMenu/MainMenu/Records" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="GUI/MainMenu/MainMenu/NewGame" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="GUI/MainMenu/MainMenu/Records" to="." method="_on_records_pressed"]
+[connection signal="pressed" from="GUI/MainMenu/MainMenu/Records" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="GUI/MainMenu/MainMenu/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="GUI/MainMenu/MainMenu/Settings" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="GUI/MainMenu/MainMenu/About" to="." method="_on_about_pressed"]
@@ -1268,13 +1268,13 @@ parameters/looping = true
 [connection signal="toggled" from="GUI/CustomGameMenu/CustomGame/NoGuessPanel/MarginContainer/VBoxContainer/HBoxContainer/NoGuessCheckBox" to="GUI/CustomGameMenu" method="_on_no_guess_toggled"]
 [connection signal="pressed" from="GUI/CustomGameMenu/CustomGame/Start Game" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="GUI/CustomGameMenu/CustomGame/Start Game" to="GUI/CustomGameMenu" method="_on_start_game_pressed"]
-[connection signal="pressed" from="GUI/CustomGameMenu/CustomGame/BackToNewGameMenu" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="GUI/CustomGameMenu/CustomGame/BackToNewGameMenu" to="." method="_on_back_to_new_game_menu_pressed"]
+[connection signal="pressed" from="GUI/CustomGameMenu/CustomGame/BackToNewGameMenu" to="." method="_on_button_pressed"]
 [connection signal="visibility_changed" from="GUI/RecordsScreen" to="GUI/RecordsScreen" method="_on_visibility_changed"]
 [connection signal="pressed" from="GUI/RecordsScreen/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Custom/VBoxContainer/HBoxContainer/VBoxContainer/SortingField" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="GUI/RecordsScreen/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Custom/VBoxContainer/HBoxContainer/VBoxContainer2/SortingOrder" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="GUI/RecordsScreen/VBoxContainer/BackToMainScreenFromRecords" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="GUI/RecordsScreen/VBoxContainer/BackToMainScreenFromRecords" to="." method="_on_back_to_main_screen_from_records_pressed"]
+[connection signal="pressed" from="GUI/RecordsScreen/VBoxContainer/BackToMainScreenFromRecords" to="." method="_on_button_pressed"]
 [connection signal="value_changed" from="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList/AudioPanel/MarginContainer/VBoxContainer/MasterVolume" to="GUI/SettingsMenu" method="_on_master_volume_changed"]
 [connection signal="value_changed" from="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList/AudioPanel/MarginContainer/VBoxContainer/MusicVolume" to="GUI/SettingsMenu" method="_on_music_volume_changed"]
 [connection signal="toggled" from="GUI/SettingsMenu/Settings/ScrollContainer/SettingsList/HapticsPanel/MarginContainer/HBoxContainer/VibrationCheckBox" to="GUI/SettingsMenu" method="_on_vibration_toggled"]
